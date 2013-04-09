@@ -6,24 +6,30 @@ BDK\EnquiryBundle\Document\Enquiry:
   fields:
     id:
       id: true
-    name:
+    type:
       type: string
-    form:
-      type: string
+    created_at:
+      type: datetime
+    updated_at:
+      type: datetime
+
+  embedMany:
+    responses:
+      targetDocument: Response
 
   indexes:
     name:
       keys:
-        name: asc
+        type: asc
       options:
         unique: true
         safe: true
         sparse: true
-
-  referenceOne:
-    about: ~
-
-  referenceMany:
-    answers:
-      targetDocument: Answer
-      mappedBy: enquiry
+#
+#  referenceOne:
+#    about: ~
+#
+#  referenceMany:
+#    answers:
+#      targetDocument: Answer
+#      mappedBy: enquiry

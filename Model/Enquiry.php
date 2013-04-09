@@ -27,26 +27,39 @@ abstract class Enquiry implements EnquiryInterface, NormalizableInterface
     /**
      * @var string
      */
-    protected $name;
-
-    /**
-     * @var Collection
-     */
-    protected $answers;
+    protected $user;
 
     /**
      * @var string
      */
-    protected $form;
+    protected $type;
 
     /**
      * @var stdClass
      */
     protected $about;
 
+    /**
+     * @var DateTime
+     */
+    protected $createdAt;
+
+    /**
+     * @var DateTime
+     */
+    protected $updatedAt;
+
+    /**
+     * @var Collection
+     */
+    protected $responses;
+
+    /**
+     *
+     */
     public function __construct()
     {
-        $this->answers = new ArrayCollection();
+        $this->responses = new ArrayCollection();
     }
 
     /**
@@ -60,82 +73,59 @@ abstract class Enquiry implements EnquiryInterface, NormalizableInterface
     }
 
     /**
-     * Set name
+     * Set user
      *
-     * @param  string  $name
+     * @param $user
      * @return Enquiry
      */
-    public function setName($name)
+    public function setUser($user)
     {
-        $this->name = $name;
+        $this->user = $user;
 
         return $this;
     }
 
     /**
-     * Get name
+     * Get user
      *
      * @return string
      */
-    public function getName()
+    public function getUser()
     {
-        return $this->name;
+        return $this->user;
     }
 
     /**
-     * Set answers
+     * Set responses
      *
-     * @param  Collection $answers
+     * @param  Collection $responses
      * @return Enquiry
      */
-    public function setAnswers(Collection $answers)
+    public function setResponses(Collection $responses)
     {
-        $this->answers = $answers;
+        $this->responses = $responses;
 
         return $this;
     }
 
     /**
-     * Get answers
+     * Get responses
      *
      * @return Collection
      */
-    public function getAnswers()
+    public function getResponses()
     {
-        return $this->answers;
+        return $this->responses;
     }
 
     /**
      * Add answer
-     * @param Answer $answer
+     * @param Response $response
      */
-    public function addAnswer(Answer $answer)
+    public function addResponse(Response $response)
     {
-        $this->answers->add($answer);
-        $answer->setEnquiry($this);
-    }
-
-    /**
-     * Set form
-     *
-     * @param  string  $form
-     * @return Enquiry
-     */
-    public function setForm($form)
-    {
-        $this->form = $form;
-
-        return $this;
-    }
-
-    /**
-     * Get form
-     *
-     * @return string
-     */
-    public function getForm()
-    {
-        return $this->form;
+        $this->responses->add($response);
+        $response->setEnquiry($this);
     }
 
     /**
@@ -182,15 +172,72 @@ abstract class Enquiry implements EnquiryInterface, NormalizableInterface
             $normalized['name'] = $this->name;
         }
 
-        $answers = array();
+        $responses = array();
 
-        foreach ($this->answers as $answer) {
-            $answers[] = $normalizer->normalize($answer,$format);
+        foreach ($this->responses as $response) {
+            $responses[] = $normalizer->normalize($response,$format);
         }
 
-        $normalized['answers'] = $answers;
+        $normalized['responses'] = $responses;
 
         return array('enquiry'=>$normalized);
 
+    }
+
+    /**
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param string $type
+     *
+     * @return Enquiry
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+        return $this;
+    }
+
+    /**
+     * @return \BDK\EnquiryBundle\Model\DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * @param \BDK\EnquiryBundle\Model\DateTime $createdAt
+     *
+     * @return Enquiry
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+        return $this;
+    }
+
+    /**
+     * @return \BDK\EnquiryBundle\Model\DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * @param \BDK\EnquiryBundle\Model\DateTime $updatedAt
+     *
+     * @return Enquiry
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+        return $this;
     }
 }
