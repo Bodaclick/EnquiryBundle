@@ -1,6 +1,6 @@
 parameters:
     bdk.response_mapping:
-      default: Bodaclick\BDKEnquiryBundle\Document\Response
+      default: BDK\EnquiryBundle\Document\Response
 
 services:
 
@@ -10,9 +10,9 @@ services:
         factory_method: getManager
 
     bdk.response_mapping.listener:
-        class: Bodaclick\BDKEnquiryBundle\Doctrine\ODM\MongoDB\EventListener\ResponseMappingListener
+        class: BDK\EnquiryBundle\Doctrine\ODM\MongoDB\EventListener\ResponseMappingListener
         public: false
 
     bdk.db_prefix.listener:
-        class: Bodaclick\BDKEnquiryBundle\Doctrine\ODM\MongoDB\EventListener\CollectionNamePrefixListener
+        class: BDK\EnquiryBundle\Doctrine\ODM\MongoDB\EventListener\CollectionNamePrefixListener
         public: false

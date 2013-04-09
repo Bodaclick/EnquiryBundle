@@ -12,8 +12,8 @@
 namespace BDK\EnquiryBundle\Doctrine\ODM\MongoDB\Repository;
 
 use Doctrine\ODM\MongoDB\DocumentRepository;
-use Bodaclick\BDKEnquiryBundle\Model\AboutInterface;
-use Bodaclick\BDKEnquiryBundle\Model\EnquiryRepositoryInterface;
+use BDK\EnquiryBundle\Model\AboutInterface;
+use BDK\EnquiryBundle\Model\EnquiryRepositoryInterface;
 
 /**
  * Enquiry repository

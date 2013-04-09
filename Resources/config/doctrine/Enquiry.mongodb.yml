@@ -1,6 +1,6 @@
-Bodaclick\BDKEnquiryBundle\Document\Enquiry:
+BDK\EnquiryBundle\Document\Enquiry:
   type: document
-  repositoryClass: Bodaclick\BDKEnquiryBundle\Doctrine\ODM\MongoDB\Repository\EnquiryRepository
+  repositoryClass: BDK\EnquiryBundle\Doctrine\ODM\MongoDB\Repository\EnquiryRepository
   collection: enquiries
   requireIndexes: true
   fields:

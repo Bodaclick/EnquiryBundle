@@ -2,7 +2,7 @@
 
 namespace BDK\EnquiryBundle\Tests\Model;
 
-use Bodaclick\BDKEnquiryBundle\Model\ResponseNormalizer;
+use BDK\EnquiryBundle\Model\ResponseNormalizer;
 
 class ResponseNormalizerTest extends \PHPUnit_Framework_TestCase
 {
@@ -11,7 +11,7 @@ class ResponseNormalizerTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->response = $this->getMock('Bodaclick\BDKEnquiryBundle\Model\Response', array('getKey', 'getValue'));
+        $this->response = $this->getMock('BDK\EnquiryBundle\Model\Response', array('getKey', 'getValue'));
         $this->response->expects($this->any())
             ->method('getKey')
             ->will($this->returnValue('key'));
@@ -99,12 +99,12 @@ class ResponseNormalizerTest extends \PHPUnit_Framework_TestCase
     {
         //Use of a mock object to mock the creation of Response classes, the rest remains untouched
         $normalizer = $this->getMock(
-            'Bodaclick\BDKEnquiryBundle\Model\ResponseNormalizer',
+            'BDK\EnquiryBundle\Model\ResponseNormalizer',
             array('createResponseClass'),
             array(get_class($this->response), array())
         );
 
-        $response = $this->getMockForAbstractClass('Bodaclick\BDKEnquiryBundle\Model\Response');
+        $response = $this->getMockForAbstractClass('BDK\EnquiryBundle\Model\Response');
 
         $normalizer->expects($this->any())
             ->method('createResponseClass')
@@ -122,12 +122,12 @@ class ResponseNormalizerTest extends \PHPUnit_Framework_TestCase
         //Use of a mock object to mock the creation of Response classes, the rest remains untouched
         //The class names in method parameters are dummy, as they are not used or its construction is mocked
         $normalizer = $this->getMock(
-            'Bodaclick\BDKEnquiryBundle\Model\ResponseNormalizer',
+            'BDK\EnquiryBundle\Model\ResponseNormalizer',
             array('createResponseClass'),
             array('DefaultResponse', array('mytype'=>'Dummy'))
         );
 
-        $response = $this->getMockForAbstractClass('Bodaclick\BDKEnquiryBundle\Model\Response');
+        $response = $this->getMockForAbstractClass('BDK\EnquiryBundle\Model\Response');
         $normalizer->expects($this->any())
             ->method('createResponseClass')
             ->will($this->returnValue($response));

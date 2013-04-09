@@ -2,7 +2,7 @@
 
 namespace BDK\EnquiryBundle\Tests\Model;
 
-use Bodaclick\BDKEnquiryBundle\Model\EnquiryManager;
+use BDK\EnquiryBundle\Model\EnquiryManager;
 
 class EnquiryManagerTest extends \PHPUnit_Framework_TestCase
 {
@@ -19,9 +19,9 @@ class EnquiryManagerTest extends \PHPUnit_Framework_TestCase
             ->method('getClassMetadata')
             ->will($this->returnCallback(array($this, 'createClassMetadata')));
 
-        $this->about = $this->getMock('Bodaclick\BDKEnquiryBundle\Model\AboutInterface');
+        $this->about = $this->getMock('BDK\EnquiryBundle\Model\AboutInterface');
 
-        $this->enquiry = $this->getMockForAbstractClass('Bodaclick\BDKEnquiryBundle\Model\Enquiry');
+        $this->enquiry = $this->getMockForAbstractClass('BDK\EnquiryBundle\Model\Enquiry');
 
         $answer = $this->createAnswer();
 
@@ -43,7 +43,7 @@ class EnquiryManagerTest extends \PHPUnit_Framework_TestCase
 
         $enquiry = $this->enquiryManager->saveEnquiry($this->about, $form, $name);
 
-        $this->assertInstanceOf('Bodaclick\BDKEnquiryBundle\Model\Enquiry', $enquiry);
+        $this->assertInstanceOf('BDK\EnquiryBundle\Model\Enquiry', $enquiry);
         $this->assertEquals($form, $enquiry->getForm());
         $this->assertEquals($name, $enquiry->getName());
     }
@@ -204,7 +204,7 @@ class EnquiryManagerTest extends \PHPUnit_Framework_TestCase
 
     protected function createAnswer()
     {
-        $answer = $this->getMockForAbstractClass('Bodaclick\BDKEnquiryBundle\Model\Answer');
+        $answer = $this->getMockForAbstractClass('BDK\EnquiryBundle\Model\Answer');
 
         $answer->addResponse($this->createResponse());
 
@@ -213,7 +213,7 @@ class EnquiryManagerTest extends \PHPUnit_Framework_TestCase
 
     protected function createResponse()
     {
-        $response = $this->getMockForAbstractClass('Bodaclick\BDKEnquiryBundle\Model\Response');
+        $response = $this->getMockForAbstractClass('BDK\EnquiryBundle\Model\Response');
 
         $response->setKey('test');
         $response->setValue('test');
@@ -223,7 +223,7 @@ class EnquiryManagerTest extends \PHPUnit_Framework_TestCase
 
     protected function setUpEnquiryRepository()
     {
-        $repository = $this->getMock('Bodaclick\BDKEnquiryBundle\Model\EnquiryRepositoryInterface');
+        $repository = $this->getMock('BDK\EnquiryBundle\Model\EnquiryRepositoryInterface');
         $repository->expects($this->any())
             ->method('getEnquiriesFor')
             ->will($this->returnValue(array($this->enquiry)));

@@ -11,7 +11,7 @@
 
 namespace BDK\EnquiryBundle\Document;
 
-use Bodaclick\BDKEnquiryBundle\Model\Response as BaseResponse;
+use BDK\EnquiryBundle\Model\Response as BaseResponse;
 
 /**
  * Response document

@@ -1,4 +1,4 @@
-Bodaclick\BDKEnquiryBundle\Document\Response:
+BDK\EnquiryBundle\Document\Response:
   type: embeddedDocument
   fields:
     key:

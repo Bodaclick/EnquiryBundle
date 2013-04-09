@@ -19,9 +19,9 @@ use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\Exception\InvalidArgumentException;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Bodaclick\BDKEnquiryBundle\Events\Events;
+use BDK\EnquiryBundle\Events\Events;
 use Symfony\Component\EventDispatcher\Event;
-use Bodaclick\BDKEnquiryBundle\Events\EnquiryEvent;
+use BDK\EnquiryBundle\Events\EnquiryEvent;
 use Symfony\Component\HttpKernel\Log\LoggerInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
@@ -150,7 +150,7 @@ class EnquiryManager
      *
      * @param string $name Name associated to the enquiry
      * @param string | null $format Format of the response (json, xml). Optional. If null, return db object or null
-     * @return Bodaclick\BDKEnquiryBundle\Model\Enquiry | null
+     * @return BDK\EnquiryBundle\Model\Enquiry | null
      */
     public function getEnquiryByName($name, $format = null)
     {
@@ -164,7 +164,7 @@ class EnquiryManager
      *
      * @param $id
      * @param string | null $format Format of the response (json, xml). Optional. If null, return db object or null
-     * @return Bodaclick\BDKEnquiryBundle\Model\Enquiry | null
+     * @return BDK\EnquiryBundle\Model\Enquiry | null
      */
     public function getEnquiry($id, $format = null)
     {
@@ -199,7 +199,7 @@ class EnquiryManager
      * @param string $form The name of a form associated to the enquiry. Only used for reference. Optional.
      * @param string $name A name associated to the enquiry. Optional. If specified, must be unique
      *
-     * @return Bodaclick\BDKEnquiryBundle\Model\EnquiryInterface The enquiry database object created
+     * @return BDK\EnquiryBundle\Model\EnquiryInterface The enquiry database object created
      */
     public function saveEnquiry(AboutInterface $about, $form = null, $name = null)
     {
@@ -267,7 +267,7 @@ class EnquiryManager
     /**
      * Delete an enquiry from the database by name or specifying the object itself
      *
-     * @param Bodaclick\BDKEnquiryBundle\Model\EnquiryInterface | string The enquiry
+     * @param BDK\EnquiryBundle\Model\EnquiryInterface | string The enquiry
      * object or the name of the enquiry that is going to be deleted
      */
     public function deleteEnquiry($enquiry)
@@ -288,8 +288,8 @@ class EnquiryManager
      * The enquiry can be specified by its database object representation or by name
      * The responses come in an array of Response objects
      *
-     * @param Bodaclick\BDKEnquiryBundle\Model\EnquiryInterface | string The enquiry object or the name of the enquiry
-     * @param Bodaclick\BDKEnquiryBundle\Model\Answer            $answer An answer object containing the responses given
+     * @param BDK\EnquiryBundle\Model\EnquiryInterface | string The enquiry object or the name of the enquiry
+     * @param BDK\EnquiryBundle\Model\Answer            $answer An answer object containing the responses given
      * @param \Symfony\Component\Security\Core\User\UserInterface $user  The user that the answers belongs to. Optional.
      */
     public function saveAnswer($enquiry, Answer $answer, UserInterface $user = null)
@@ -339,7 +339,7 @@ class EnquiryManager
      * The enquiry can be specified by its database object representation or by name
      * The responses come in an array of Response objects
      *
-     * @param Bodaclick\BDKEnquiryBundle\Model\EnquiryInterface | string The enquiry object or the name of the enquiry
+     * @param BDK\EnquiryBundle\Model\EnquiryInterface | string The enquiry object or the name of the enquiry
      * @param array | string $responses Array of Response objects or raw key=>value pair, or string in json format
      * @param \Symfony\Component\Security\Core\User\UserInterface $user  The user that the answers belongs to. Optional.
      */
@@ -396,7 +396,7 @@ class EnquiryManager
     /**
      * Create an empty answer entity or document
      *
-     * @return Bodaclick\BDKEnquiryBundle\Model\Answer
+     * @return BDK\EnquiryBundle\Model\Answer
      */
     public function createAnswer()
     {
@@ -409,7 +409,7 @@ class EnquiryManager
     /**
      * Create an empty response entity or document
      *
-     * @return Bodaclick\BDKEnquiryBundle\Model\Response
+     * @return BDK\EnquiryBundle\Model\Response
      */
     public function createResponse()
     {
@@ -420,9 +420,9 @@ class EnquiryManager
      * Helper function used to check the enquiry param in some methods
      * If it's a string, guess it's the enquiry name, if not, the enquiry object itself
      *
-     * @param string | Bodaclick\BDKEnquiryBundle\Model\EnquiryInterface $enquiry
+     * @param string | BDK\EnquiryBundle\Model\EnquiryInterface $enquiry
      *          The enquiry object or the enquiry's name
-     * @return Bodaclick\BDKEnquiryBundle\Model\EnquiryInterface
+     * @return BDK\EnquiryBundle\Model\EnquiryInterface
      *
      * @throws \InvalidArgumentException
      */

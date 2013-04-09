@@ -1,4 +1,4 @@
-Bodaclick\BDKEnquiryBundle\Document\Answer:
+BDK\EnquiryBundle\Document\Answer:
   type: document
   collection: answers
   fields:

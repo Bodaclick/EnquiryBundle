@@ -11,7 +11,7 @@
 
 namespace BDK\EnquiryBundle\Tests\Controller;
 
-use Bodaclick\BDKEnquiryBundle\Model\EnquiryManager;
+use BDK\EnquiryBundle\Model\EnquiryManager;
 use Symfony\Component\HttpFoundation\Request;
 
 class EnquiryControllerTest extends \PHPUnit_Framework_TestCase
@@ -30,7 +30,7 @@ class EnquiryControllerTest extends \PHPUnit_Framework_TestCase
             ->method('getClassMetadata')
             ->will($this->returnCallback(array($this, 'createClassMetadata')));
 
-        $this->enquiry = $this->getMockForAbstractClass('Bodaclick\BDKEnquiryBundle\Model\Enquiry');
+        $this->enquiry = $this->getMockForAbstractClass('BDK\EnquiryBundle\Model\Enquiry');
 
         $answer = $this->createAnswer();
 
@@ -43,7 +43,7 @@ class EnquiryControllerTest extends \PHPUnit_Framework_TestCase
         $defaultClass = get_class($answer->getResponses()->first());
         $this->enquiryManager = new EnquiryManager($this->objectManager, $dispatcher, $defaultClass , array() );
 
-        $this->controller = new \Bodaclick\BDKEnquiryBundle\Controller\EnquiryController(
+        $this->controller = new \BDK\EnquiryBundle\Controller\EnquiryController(
             $this->enquiryManager,
             $this->getMockForAbstractClass('Symfony\Component\Security\Core\SecurityContextInterface')
         );
@@ -139,7 +139,7 @@ class EnquiryControllerTest extends \PHPUnit_Framework_TestCase
 
     protected function createAnswer()
     {
-        $answer = $this->getMockForAbstractClass('Bodaclick\BDKEnquiryBundle\Model\Answer');
+        $answer = $this->getMockForAbstractClass('BDK\EnquiryBundle\Model\Answer');
 
         $answer->addResponse($this->createResponse());
 
@@ -148,7 +148,7 @@ class EnquiryControllerTest extends \PHPUnit_Framework_TestCase
 
     protected function createResponse()
     {
-        $response = $this->getMockForAbstractClass('Bodaclick\BDKEnquiryBundle\Model\Response');
+        $response = $this->getMockForAbstractClass('BDK\EnquiryBundle\Model\Response');
 
         $response->setKey('test');
         $response->setValue('test');

@@ -38,20 +38,20 @@ class LinkAboutListenerTest extends \PHPUnit_Framework_TestCase
             ->method('getClassMetadata')
             ->will($this->returnValue($metadata));
 
-        $aboutMock = $this->getMock('Bodaclick\BDKEnquiryBundle\Model\AboutInterface');
+        $aboutMock = $this->getMock('BDK\EnquiryBundle\Model\AboutInterface');
 
         $this->entityManager->expects($this->any())
             ->method('getReference')
             ->with($this->equalTo('About'),$this->equalTo(array('id'=>1)))
             ->will($this->returnValue($aboutMock));
 
-        $this->listener = new \Bodaclick\BDKEnquiryBundle\Doctrine\ORM\EventListener\LinkAboutListener();
+        $this->listener = new \BDK\EnquiryBundle\Doctrine\ORM\EventListener\LinkAboutListener();
     }
 
     public function testPrePersist()
     {
 
-        $entity = new \Bodaclick\BDKEnquiryBundle\Entity\Enquiry();
+        $entity = new \BDK\EnquiryBundle\Entity\Enquiry();
 
         $event = new \Doctrine\ORM\Event\LifecycleEventArgs($entity, $this->entityManager);
 
@@ -66,7 +66,7 @@ class LinkAboutListenerTest extends \PHPUnit_Framework_TestCase
 
     public function testPreUpdate()
     {
-        $entity = new \Bodaclick\BDKEnquiryBundle\Entity\Enquiry();
+        $entity = new \BDK\EnquiryBundle\Entity\Enquiry();
 
         $changeSet = array('about'=>array('old', 'new'));
 
@@ -80,7 +80,7 @@ class LinkAboutListenerTest extends \PHPUnit_Framework_TestCase
 
     public function testRegenerateAboutField()
     {
-        $entity = new \Bodaclick\BDKEnquiryBundle\Entity\Enquiry();
+        $entity = new \BDK\EnquiryBundle\Entity\Enquiry();
         $entity->setAbout(json_encode(array("className"=>'About', "ids"=>array('id'=>1))));
 
         $event = new \Doctrine\ORM\Event\LifecycleEventArgs($entity, $this->entityManager);
@@ -88,6 +88,6 @@ class LinkAboutListenerTest extends \PHPUnit_Framework_TestCase
         //Use the postLoad method that call protected method regenerateAboutField
         $this->listener->postLoad($event);
 
-        $this->assertInstanceof('Bodaclick\BDKEnquiryBundle\Model\AboutInterface', $entity->getAbout());
+        $this->assertInstanceof('BDK\EnquiryBundle\Model\AboutInterface', $entity->getAbout());
     }
 }

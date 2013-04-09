@@ -32,7 +32,7 @@ abstract class Answer implements NormalizableInterface, DenormalizableInterface
     protected $user;
 
     /**
-     * @var Bodaclick\BDKEnquiryBundle\Model\EnquiryInterface
+     * @var BDK\EnquiryBundle\Model\EnquiryInterface
      */
     protected $enquiry;
 
@@ -82,7 +82,7 @@ abstract class Answer implements NormalizableInterface, DenormalizableInterface
     /**
      * Set enquiry
      *
-     * @param  Bodaclick\BDKEnquiryBundle\Model\EnquiryInterface $enquiry
+     * @param  BDK\EnquiryBundle\Model\EnquiryInterface $enquiry
      * @return Answer
      */
     public function setEnquiry(EnquiryInterface $enquiry)
@@ -95,7 +95,7 @@ abstract class Answer implements NormalizableInterface, DenormalizableInterface
     /**
      * Get enquiry
      *
-     * @return Bodaclick\BDKEnquiryBundle\Model\EnquiryInterface $enquiry
+     * @return BDK\EnquiryBundle\Model\EnquiryInterface $enquiry
      */
     public function getEnquiry()
     {

@@ -1,25 +1,25 @@
 parameters:
     bdk.response_mapping:
-      default: Bodaclick\BDKEnquiryBundle\Entity\Response
+      default: BDK\EnquiryBundle\Entity\Response
 
 services:
     bdk.user_asocciation.listener:
-        class: Bodaclick\BDKEnquiryBundle\Doctrine\ORM\EventListener\UserAssociationListener
+        class: BDK\EnquiryBundle\Doctrine\ORM\EventListener\UserAssociationListener
         arguments: [ %bdk.user_class%]
         public: false
         tags:
             - { name: doctrine.event_listener, event: loadClassMetadata}
 
     bdk.response_mapping.listener:
-        class: Bodaclick\BDKEnquiryBundle\Doctrine\ORM\EventListener\ResponseMappingListener
+        class: BDK\EnquiryBundle\Doctrine\ORM\EventListener\ResponseMappingListener
         public: false
 
     bdk.db_prefix.listener:
-        class: Bodaclick\BDKEnquiryBundle\Doctrine\ORM\EventListener\TableNamePrefixListener
+        class: BDK\EnquiryBundle\Doctrine\ORM\EventListener\TableNamePrefixListener
         public: false
 
     bdk.link_about.listener:
-        class: Bodaclick\BDKEnquiryBundle\Doctrine\ORM\EventListener\LinkAboutListener
+        class: BDK\EnquiryBundle\Doctrine\ORM\EventListener\LinkAboutListener
         public: false
         tags:
             - { name: doctrine.event_listener, event: prePersist}

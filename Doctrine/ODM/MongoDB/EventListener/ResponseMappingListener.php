@@ -44,7 +44,7 @@ class ResponseMappingListener
         $classMetadata = $args->getClassMetadata();
 
         //The discriminatorMap is set in Answer class
-        if ($classMetadata->getName()!=='Bodaclick\BDKEnquiryBundle\Document\Answer') {
+        if ($classMetadata->getName()!=='BDK\EnquiryBundle\Document\Answer') {
             return;
         }
 

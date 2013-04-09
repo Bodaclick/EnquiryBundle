@@ -25,7 +25,7 @@ class LinkAboutListener
 {
     public function prePersist(LifecycleEventArgs $event)
     {
-        if ($event->getEntity() instanceof \Bodaclick\BDKEnquiryBundle\Entity\Enquiry) {
+        if ($event->getEntity() instanceof \BDK\EnquiryBundle\Entity\Enquiry) {
             $enquiry = $event->getEntity();
             $about = $enquiry->getAbout();
 
@@ -42,7 +42,7 @@ class LinkAboutListener
 
     public function preUpdate(PreUpdateEventArgs $event)
     {
-        if ($event->getEntity() instanceof \Bodaclick\BDKEnquiryBundle\Entity\Enquiry) {
+        if ($event->getEntity() instanceof \BDK\EnquiryBundle\Entity\Enquiry) {
             //The about object is inmutable, so undo changes to that field in updates
             $event->setNewValue('about', $event->getOldValue('about'));
         }
@@ -61,7 +61,7 @@ class LinkAboutListener
 
     protected function regenerateAboutField(LifecycleEventArgs $event)
     {
-        if ($event->getEntity() instanceof \Bodaclick\BDKEnquiryBundle\Entity\Enquiry) {
+        if ($event->getEntity() instanceof \BDK\EnquiryBundle\Entity\Enquiry) {
             $enquiry = $event->getEntity();
             $definition = $enquiry->getAbout();
 

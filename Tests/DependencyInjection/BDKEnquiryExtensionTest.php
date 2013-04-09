@@ -11,7 +11,7 @@
 
 namespace BDK\EnquiryBundle\Tests\Model;
 
-use Bodaclick\BDKEnquiryBundle\DependencyInjection\BDKEnquiryExtension;
+use BDK\EnquiryBundle\DependencyInjection\BDKEnquiryExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Yaml\Parser;
 

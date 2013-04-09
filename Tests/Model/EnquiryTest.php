@@ -9,7 +9,7 @@ class EnquiryTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->enquiry = $this->getMockBuilder('Bodaclick\BDKEnquiryBundle\Model\Enquiry')
+        $this->enquiry = $this->getMockBuilder('BDK\EnquiryBundle\Model\Enquiry')
                              ->getMockForAbstractClass();
 
         $this->enquiry->setForm('form');

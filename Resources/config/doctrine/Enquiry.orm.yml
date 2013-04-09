@@ -1,6 +1,6 @@
-Bodaclick\BDKEnquiryBundle\Entity\Enquiry:
+BDK\EnquiryBundle\Entity\Enquiry:
   type: entity
-  repositoryClass: Bodaclick\BDKEnquiryBundle\Doctrine\ORM\Repository\EnquiryRepository
+  repositoryClass: BDK\EnquiryBundle\Doctrine\ORM\Repository\EnquiryRepository
   table: enquiry
   indexes:
     name_index:

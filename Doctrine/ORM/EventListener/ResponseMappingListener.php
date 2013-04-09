@@ -12,7 +12,7 @@
 namespace BDK\EnquiryBundle\Doctrine\ORM\EventListener;
 
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
-use Bodaclick\BDKEnquiryBundle\DependencyInjection\InheritanceTypes;
+use BDK\EnquiryBundle\DependencyInjection\InheritanceTypes;
 use Doctrine\ORM\Mapping\Builder\ClassMetadataBuilder;
 
 /**

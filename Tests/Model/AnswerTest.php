@@ -8,7 +8,7 @@ class AnswerTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->answer = $this->getMockBuilder('Bodaclick\BDKEnquiryBundle\Model\Answer')
+        $this->answer = $this->getMockBuilder('BDK\EnquiryBundle\Model\Answer')
                              ->getMockForAbstractClass();
 
         $user = $this->getMockForAbstractClass('Symfony\Component\Security\Core\User\UserInterface');
@@ -48,7 +48,7 @@ class AnswerTest extends \PHPUnit_Framework_TestCase
         $denormalizer = $this->getMock('Symfony\Component\Serializer\Normalizer\DenormalizerInterface');
         $denormalizer->expects($this->any())
             ->method('denormalize')
-            ->will($this->returnValue($this->getMock('Bodaclick\BDKEnquiryBundle\Model\Response')));
+            ->will($this->returnValue($this->getMock('BDK\EnquiryBundle\Model\Response')));
 
         $data = array('answer'=>array('responses'=>array('response')));
         $this->answer->denormalize($denormalizer, $data);

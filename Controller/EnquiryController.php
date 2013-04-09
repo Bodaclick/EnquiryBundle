@@ -15,7 +15,7 @@ use Symfony\Component\Serializer\Exception\InvalidArgumentException;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpFoundation\Request;
-use Bodaclick\BDKEnquiryBundle\Model\EnquiryManager;
+use BDK\EnquiryBundle\Model\EnquiryManager;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
@@ -33,7 +33,7 @@ class EnquiryController
     /**
      * Constructor
      *
-     * @param \Bodaclick\BDKEnquiryBundle\Model\EnquiryManager $em
+     * @param \BDK\EnquiryBundle\Model\EnquiryManager $em
      */
     public function __construct(EnquiryManager $em, SecurityContextInterface $sc)
     {

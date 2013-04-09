@@ -23,7 +23,7 @@ Usage
 
 The bundles allow to create enquiries related to an entity/document and handle the responses to that enquiry.
 
-The related entity/document must implement the interface `Bodaclick\BDKEnquiryBundle\Model\AboutInterface`.
+The related entity/document must implement the interface `BDK\EnquiryBundle\Model\AboutInterface`.
 
 The enquiry also can have a name associated to it, but this name must be unique.
 So you'll have the posibility to access the enquiry by its id, its *about* entity/document associated, or by its name,
@@ -32,10 +32,10 @@ if specified.
 To save the responses to an enquiry, there is a couple of *helper* classes, that belongs to the bundle's data model.
 The most important one is the *Response* class. There is a default *Response* class defined in the bundle (depending
 on the data store used it'll be an entity or a document), that extends the model abstract class
-`Bodaclick\BDKEnquiryBundle\Model\Response`.
+`BDK\EnquiryBundle\Model\Response`.
 
 This default *Response* class has to fields to store a key and a value, and fits all generic uses. If you want to use
-your own default *Response* class, you must extends `Bodaclick\BDKEnquiryBundle\Model\Response` abstract class and
+your own default *Response* class, you must extends `BDK\EnquiryBundle\Model\Response` abstract class and
 redefine bdk.response_mapping.default parameter.
 
 If you want to use a set of *Response* classes, all of them must extends the default one, and be configured in
@@ -46,8 +46,8 @@ type in its own table (joined inheritance).
 So, to save a response to an enquiry (or a list of responses), you have three choices:
 
 - To use the `Answer` *helper* class, that it's an entity/document that admit a list of
-`Bodaclick\BDKEnquiryBundle\Model\Response` objects
-- To use an array of `Bodaclick\BDKEnquiryBundle\Model\Response` objects.
+`BDK\EnquiryBundle\Model\Response` objects
+- To use an array of `BDK\EnquiryBundle\Model\Response` objects.
 - To use a JSON representation of the responses (see below, in the controller section).
 
 The last two options finally use the first one to save the data, so at the end we have a table or a collection which
@@ -71,7 +71,7 @@ Once you have a reference to the service, you have a few methods you can use:
 
 ####getEnquiryFor and getEnquiriesFor
 
-Both method admit an *about* object (an entity/document that implements `Bodaclick\BDKEnquiryBundle\Model\AboutInterface`
+Both method admit an *about* object (an entity/document that implements `BDK\EnquiryBundle\Model\AboutInterface`
 interface), and an optional format (JSON or XML), and returns the last enquiry associated to the object or the list of
 all enquiries associated to that object (or null if none found). If format is not specified, it returns a *Enquiry*
 object or an array of *Enquiry* objects. If format is specified, returns that object/array in a JSON or XML
@@ -100,12 +100,12 @@ Delete an enquiry from the data store, given its name or its instance object.
 ####saveAnswer
 
 Save responses given to an enquiry. The enquiry can be specified by name or its instance object. The responses must be
-collected in a `Bodaclick\BDKEnquiryBundle\Model\Answer` object. An user instance can also be specified, and if so,
+collected in a `BDK\EnquiryBundle\Model\Answer` object. An user instance can also be specified, and if so,
 it will rewrite any user set in the *answer* object.
 
 *Anonymous* responses are allowed, if the user parameter is set to null.
 
-As `Bodaclick\BDKEnquiryBundle\Model\Answer` is an abstract class, the appropiated entity or document *answer* class in
+As `BDK\EnquiryBundle\Model\Answer` is an abstract class, the appropiated entity or document *answer* class in
 the bundle model must be used. There is a helper method in the service, *createAnswer*, that returns an empty instance
 of the appropiated class, based in the driver configured.
 

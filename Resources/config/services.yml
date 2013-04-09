@@ -3,12 +3,12 @@ parameters:
 
 services:
     bdk.enquiry.manager:
-        class: Bodaclick\BDKEnquiryBundle\Model\EnquiryManager
+        class: BDK\EnquiryBundle\Model\EnquiryManager
         arguments: [ @bdk.enquiry.object_manager, @event_dispatcher, %bdk.enquiry.default_response_class%, %bdk.enquiry.responses_classes%]
 
     bdk.enquiry.service:
         alias: bdk.enquiry.manager
 
     bdk.enquiry.controller:
-        class: Bodaclick\BDKEnquiryBundle\Controller\EnquiryController
+        class: BDK\EnquiryBundle\Controller\EnquiryController
         arguments: [ @bdk.enquiry.manager, @security.context]

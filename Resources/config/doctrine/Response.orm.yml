@@ -1,4 +1,4 @@
-Bodaclick\BDKEnquiryBundle\Entity\Response:
+BDK\EnquiryBundle\Entity\Response:
   type: entity
   table: response
   fields:
