@@ -1,0 +1,26 @@
+Bodaclick\BDKEnquiryBundle\Entity\Answer:
+  type: entity
+  table: answer
+  fields:
+    id:
+      type: integer
+      id: true
+      generator:
+        strategy: AUTO
+
+  oneToMany:
+    responses:
+      targetEntity: Response
+      mappedBy: answer
+      cascade: ["persist", "remove"]
+
+  manyToOne:
+    enquiry:
+      targetEntity: Enquiry
+      inversedBy: answers
+      joinColumn:
+        name: enquiry_id
+        referencedColumnName: id
+
+
+  lifecycleCallbacks: {  }

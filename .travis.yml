@@ -1,0 +1,16 @@
+language: php
+
+php:
+  - 5.3
+
+env:
+  - MONGO_VERSION=1.2.12
+
+before_script:
+  - pecl uninstall mongo
+  - pecl -q install mongo-${MONGO_VERSION} && echo "extension=mongo.so" >> `php --ini | grep "Loaded Configuration" | sed -e "s|.*:\s*||"`
+  - wget http://getcomposer.org/composer.phar
+  - php composer.phar install --dev
+
+services:
+  - mongodb

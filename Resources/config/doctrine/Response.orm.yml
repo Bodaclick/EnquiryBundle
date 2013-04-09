@@ -1,0 +1,28 @@
+Bodaclick\BDKEnquiryBundle\Entity\Response:
+  type: entity
+  table: response
+  fields:
+    id:
+      type: integer
+      id: true
+      generator:
+        strategy: AUTO
+    key:
+      type: string
+      length: 255
+      column: rkey
+    value:
+      type: string
+      column: rvalue
+      length: 255
+
+  manyToOne:
+    answer:
+      targetEntity: Answer
+      inversedBy: responses
+      joinColumn:
+        name: answer_id
+        referencedColumnName: id
+
+
+  lifecycleCallbacks: {  }

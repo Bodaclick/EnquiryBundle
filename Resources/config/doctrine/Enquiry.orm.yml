@@ -1,0 +1,36 @@
+Bodaclick\BDKEnquiryBundle\Entity\Enquiry:
+  type: entity
+  repositoryClass: Bodaclick\BDKEnquiryBundle\Doctrine\ORM\Repository\EnquiryRepository
+  table: enquiry
+  indexes:
+    name_index:
+      columns: [name]
+    about_index:
+      columns: [about]
+  fields:
+    id:
+      type: integer
+      id: true
+      generator:
+        strategy: AUTO
+    name:
+      type: string
+      length: 255
+      nullable: true
+      unique: true
+    form:
+      type: string
+      length: 255
+      nullable: true
+    about:
+      type: string
+      length: 255
+
+
+  oneToMany:
+    answers:
+      targetEntity: Answer
+      mappedBy: enquiry
+      cascade: ["persist", "remove"]
+
+  lifecycleCallbacks: {  }

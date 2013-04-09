@@ -1,0 +1,29 @@
+Bodaclick\BDKEnquiryBundle\Document\Enquiry:
+  type: document
+  repositoryClass: Bodaclick\BDKEnquiryBundle\Doctrine\ODM\MongoDB\Repository\EnquiryRepository
+  collection: enquiries
+  requireIndexes: true
+  fields:
+    id:
+      id: true
+    name:
+      type: string
+    form:
+      type: string
+
+  indexes:
+    name:
+      keys:
+        name: asc
+      options:
+        unique: true
+        safe: true
+        sparse: true
+
+  referenceOne:
+    about: ~
+
+  referenceMany:
+    answers:
+      targetDocument: Answer
+      mappedBy: enquiry

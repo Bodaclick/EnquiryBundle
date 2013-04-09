@@ -1,0 +1,18 @@
+parameters:
+    bdk.response_mapping:
+      default: Bodaclick\BDKEnquiryBundle\Document\Response
+
+services:
+
+    bdk.enquiry.object_manager:
+        class: Doctrine\ODM\MongoDB\DocumentManager
+        factory_service: doctrine_mongodb
+        factory_method: getManager
+
+    bdk.response_mapping.listener:
+        class: Bodaclick\BDKEnquiryBundle\Doctrine\ODM\MongoDB\EventListener\ResponseMappingListener
+        public: false
+
+    bdk.db_prefix.listener:
+        class: Bodaclick\BDKEnquiryBundle\Doctrine\ODM\MongoDB\EventListener\CollectionNamePrefixListener
+        public: false
