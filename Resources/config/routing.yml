@@ -1,18 +1,22 @@
-bdk_enquiry_get:
-    pattern:  /enquiry/{id}.{_format}
-    defaults: { _controller: bdk.enquiry.controller:getEnquiryAction, _format: json }
-    requirements:
-        _format: %bdk.enquiry.api.supported_formats%
+#bdk_enquiry_get:
+#    pattern:  /enquiry/{id}.{_format}
+#    defaults: { _controller: bdk.enquiry.controller:getEnquiryAction, _format: json }
+#    requirements:
+#        _format: %bdk.enquiry.api.supported_formats%
+#
+#bdk_enquiry_get_by_name:
+#    pattern:  /enquiry/by_name/{name}.{_format}
+#    defaults: { _controller: bdk.enquiry.controller:getEnquiryByNameAction, _format: json }
+#    requirements:
+#        _format: %bdk.enquiry.api.supported_formats%
+#
+#bdk_enquiry_save_answer:
+#    pattern:  /answer/save/{enquiryId}.{_format}
+#    defaults: { _controller: bdk.enquiry.controller:saveAnswerAction, _format: json }
+#    requirements:
+#        _format:  %bdk.enquiry.api.supported_formats%
+#        _method: POST
 
-bdk_enquiry_get_by_name:
-    pattern:  /enquiry/by_name/{name}.{_format}
-    defaults: { _controller: bdk.enquiry.controller:getEnquiryByNameAction, _format: json }
-    requirements:
-        _format: %bdk.enquiry.api.supported_formats%
 
-bdk_enquiry_save_answer:
-    pattern:  /answer/save/{enquiryId}.{_format}
-    defaults: { _controller: bdk.enquiry.controller:saveAnswerAction, _format: json }
-    requirements:
-        _format:  %bdk.enquiry.api.supported_formats%
-        _method: POST
+bdk_enquiry_enquiry:
+    resource: BDK\EnquiryBundle\Controller\EnquiryController

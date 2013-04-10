@@ -11,6 +11,8 @@
 
 namespace BDK\EnquiryBundle\Controller;
 
+use BDK\EnquiryBundle\Form\Type\EnquiryFormType;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Exception\InvalidArgumentException;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -18,144 +20,184 @@ use Symfony\Component\HttpFoundation\Request;
 use BDK\EnquiryBundle\Model\EnquiryManager;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use FOS\RestBundle\Controller\Annotations\NamePrefix;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use BDK\EnquiryBundle\Form\Handler\EnquiryFormHandler;
 
 /**
  * Controller class
+ * @Route("/enquiries")
  */
-class EnquiryController
+class EnquiryController extends Controller
 {
-    //Enquiry Manager
-    protected $em;
-
-    //Security Context
-    protected $sc;
-
     /**
-     * Constructor
+     * Action to get a list of enquiries in json or xml format. You can apply a type or about filter.
      *
-     * @param \BDK\EnquiryBundle\Model\EnquiryManager $em
+     * @Route(".{_format}", name="bdk_enquiry_list", requirements={"_format" = "json|xml"},
+     *      defaults={"_format" = "json"}
+     * )
+     * @Method({"GET"})
      */
-    public function __construct(EnquiryManager $em, SecurityContextInterface $sc)
+    public function getEnquiriesAction(Request $request)
     {
-        $this->em = $em;
-        $this->sc = $sc;
+        $enquiriesArray = new ArrayCollection();
+        $serializer = $this->get('serializer');
+        $em = $this->container->get('bdk.enquiry.manager');
+
+        // Query parameters
+        $type = $request->query->get('type');
+        $about = $request->query->get('about');
+
+        $enquiries = $em->getRepository()->findAll();
+
+        foreach ($enquiries as $enquiry) {
+            $enquiriesArray->add($enquiry);
+        }
+
+        // Applying filters
+        if (null !== $type) {
+            $enquiriesArray = $enquiriesArray->filter(
+                function ($enquiry) use ($type) {
+                    return $type === $enquiry->getType();
+                }
+            );
+        }
+
+        if (null !== $about) {
+            $enquiriesArray = $enquiriesArray->filter(
+                function ($enquiry) use ($about) {
+                    return $about === $enquiry->getAbout();
+                }
+            );
+        }
+
+        return new Response(
+            $serializer->serialize($enquiriesArray, $request->getRequestFormat()),
+            200,
+            array('Content-Type' => "application/{$request->getRequestFormat()}")
+        );
     }
 
     /**
      * Action to get an enquiry by id, in json or xml format
-     *
-     * @param $id
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     * @return \Symfony\Component\HttpFoundation\Response
-     * @throws
+     * @Route("/{id}.{_format}", name="bdk_enquiry_get", requirements={"_format" = "json|xml"},
+     *      defaults={"_format" = "json"}
+     * )
+     * @Method({"GET"})
      */
-    public function getEnquiryAction($id, Request $request)
+    public function getEnquiryAction(Request $request, $id)
     {
+        $serializer = $this->get('serializer');
+        $em = $this->container->get('bdk.enquiry.manager');
 
-        //Get the enquiry in the format requested (json or xml)
-        $enquiry = $this->em->getEnquiry($id, $request->getRequestFormat());
+        $enquiry = $em->getRepository()->findOneById($id);
 
-        //If not found, return a 404 HTTP code
-        if ($enquiry==null) {
-            throw $this->createNotFoundException();
+        if (null === $enquiry) {
+            return new Response(null, 404, array('Content-Type' => "application/{$request->getRequestFormat()}"));
         }
 
-        return new Response($enquiry, 200, array('Content-Type'=>'application/json'));
-    }
-
-    /**
-     * Action to get an enquiry by name, in json or xml format
-     *
-     * @param $name
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     * @return \Symfony\Component\HttpFoundation\Response
-     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
-     */
-    public function getEnquiryByNameAction($name, Request $request)
-    {
-
-        //Get the enquiry in the format requested (json or xml)
-        $enquiry = $this->em->getEnquiryByName($name, $request->getRequestFormat());
-
-        //If not found, return a 404 HTTP code
-        if ($enquiry==null) {
-            throw $this->createNotFoundException();
-        }
-
-        return new Response($enquiry, 200, array('Content-Type'=>'application/json'));
-    }
-
-    /**
-     * Save an user response/s to an existing enquiry specified by its id
-     * The responses are given in the content of a POST request, in the following format:
-     * "answer": { "responses": [ {"key"="examplekey","value"="examplevalue",...}, {...},...]}
-     *
-     * @param $enquiryId
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     * @return \Symfony\Component\HttpFoundation\Response
-     * @throws \Symfony\Component\Serializer\Exception\InvalidArgumentException
-     * @throws \Symfony\Component\HttpKernel\Exception\HttpException
-     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
-     */
-    public function saveAnswerAction($enquiryId, Request $request)
-    {
-
-        //Get the responses in json format from the body of the POST request
-        $content = $request->getContent();
-        $content_type = $request->headers->get('Content-Type');
-
-        //Check that it's the right content type and the content is not empty
-        if (strpos($content_type,'application/json')===false || empty($content)) {
-            throw new HttpException(405);
-        }
-
-        //Get the enquiry by id, using the service
-        $enquiry = $this->em->getEnquiry($enquiryId);
-
-        //If not found, return 404 HTTP code
-        if ($enquiry==null) {
-            throw $this->createNotFoundException();
-        }
-
-        //Save the answer, using the service
-        $this->em->saveResponses($enquiry, $content, $this->getUser());
-
-        //Return an empty response
-        return new Response('', 200, array('Content-Type'=>'application/json'));
-    }
-
-    /**
-     * Returns a NotFoundHttpException.
-     *
-     * @param string    $message  A message
-     * @param \Exception $previous The previous exception
-     *
-     * @return NotFoundHttpException
-     */
-    public function createNotFoundException($message = 'Not Found', \Exception $previous = null)
-    {
-        return new NotFoundHttpException($message, $previous);
+        return new Response(
+            $serializer->serialize($enquiry, $request->getRequestFormat()),
+            200,
+            array('Content-Type' => "application/{$request->getRequestFormat()}")
+        );
     }
 
 
     /**
-     * Get a user from the Security Context
-     *
-     * @return mixed
-     *
-     * @see Symfony\Component\Security\Core\Authentication\Token\TokenInterface::getUser()
+     * Action to create an enquiry
+     * @Route(".{_format}", name="bdk_enquiry_post", requirements={"_format" = "json|xml"},
+     *      defaults={"_format" = "json"}
+     * )
+     * @Method({"POST"})
      */
-    public function getUser()
+    public function postEnquiryAction(Request $request)
     {
+        $serializer = $this->get('serializer');
+        $em = $this->container->get('bdk.enquiry.manager');
 
-        if (null === $token = $this->sc->getToken()) {
-            return null;
+        $form = $this->createForm(new EnquiryFormType(), $em->create());
+        $formHandler = new EnquiryFormHandler($form, $request->request->all(), $em);
+
+        if ($formHandler->process()) {
+            return new Response(
+                $serializer->serialize($form->getData(), $request->getRequestFormat()),
+                201,
+                array('Content-Type' => "application/{$request->getRequestFormat()}")
+            );
         }
 
-        if (!is_object($user = $token->getUser())) {
-            return null;
+        return new Response(
+            $serializer->serialize($formHandler->getErrorsArray(), $request->getRequestFormat()),
+            400,
+            array('Content-Type' => "application/{$request->getRequestFormat()}")
+        );
+    }
+
+
+    /**
+     * Action to create an enquiry
+     * @Route("/{id}.{_format}", name="bdk_enquiry_post", requirements={"_format" = "json|xml"},
+     *      defaults={"_format" = "json"}
+     * )
+     * @Method({"PUT"})
+     */
+    public function putEnquiryAction(Request $request, $id)
+    {
+        $serializer = $this->get('serializer');
+        $em = $this->container->get('bdk.enquiry.manager');
+
+        $enquiry = $em->getRepository()->findOneById($id);
+
+        if (null === $enquiry) {
+            return new Response(null, 404, array('Content-Type' => "application/{$request->getRequestFormat()}"));
         }
 
-        return $user;
+        $form = $this->createForm(new EnquiryFormType(), $enquiry);
+        $formHandler = new EnquiryFormHandler($form, $request->request->all(), $em);
+
+        if ($formHandler->process()) {
+            return new Response(
+                $serializer->serialize($form->getData(), $request->getRequestFormat()),
+                201,
+                array('Content-Type' => "application/{$request->getRequestFormat()}")
+            );
+        }
+
+        return new Response(
+            $serializer->serialize($formHandler->getErrorsArray(), $request->getRequestFormat()),
+            400,
+            array('Content-Type' => "application/{$request->getRequestFormat()}")
+        );
+    }
+
+
+    /**
+     * Delete an enquiry
+     *
+     * @Route("/{id}.{_format}", name="bdk_enquiry_delete", requirements={"_format" = "json|xml"},
+     *      defaults={"_format" = "json"}
+     * )
+     * @Method({"DELETE"})
+     */
+    public function deleteEnquiryAction(Request $request, $id)
+    {
+        $em = $this->container->get('bdk.enquiry.manager');
+
+        $enquiry = $em->getRepository()->findOneById($id);
+
+        if (null === $enquiry) {
+            return new Response(null, 404, array('Content-Type' => "application/{$request->getRequestFormat()}"));
+        }
+
+        $em->remove($enquiry);
+
+        return new Response(
+            null,
+            200,
+            array('Content-Type' => "application/{$request->getRequestFormat()}")
+        );
     }
 }

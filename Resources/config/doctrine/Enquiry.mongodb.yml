@@ -8,10 +8,20 @@ BDK\EnquiryBundle\Document\Enquiry:
       id: true
     type:
       type: string
-    created_at:
-      type: datetime
-    updated_at:
-      type: datetime
+    about:
+      type: string
+    createdAt:
+      type: date
+      column: created_at
+      gedmo:
+        timestampable:
+          on: create
+    updatedAt:
+      type: date
+      column: updated_at
+      gedmo:
+        timestampable:
+          on: update
 
   embedMany:
     responses:
@@ -22,14 +32,5 @@ BDK\EnquiryBundle\Document\Enquiry:
       keys:
         type: asc
       options:
-        unique: true
         safe: true
         sparse: true
-#
-#  referenceOne:
-#    about: ~
-#
-#  referenceMany:
-#    answers:
-#      targetDocument: Answer
-#      mappedBy: enquiry
