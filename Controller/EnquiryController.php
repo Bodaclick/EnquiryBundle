@@ -11,8 +11,8 @@
 
 namespace BDK\EnquiryBundle\Controller;
 
-use BDK\EnquiryBundle\Form\Type\EnquiryFormType;
 use Doctrine\Common\Collections\ArrayCollection;
+use JMS\SecurityExtraBundle\Annotation\Secure;
 use Symfony\Component\Serializer\Exception\InvalidArgumentException;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -24,7 +24,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use FOS\RestBundle\Controller\Annotations\NamePrefix;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use BDK\EnquiryBundle\Form\Handler\EnquiryFormHandler;
 
 /**
  * Controller class
@@ -38,6 +37,7 @@ class EnquiryController extends Controller
      * @Route(".{_format}", name="bdk_enquiry_list", requirements={"_format" = "json|xml"},
      *      defaults={"_format" = "json"}
      * )
+     * @Secure(roles="ROLE_ADMIN")
      * @Method({"GET"})
      */
     public function getEnquiriesAction(Request $request)
@@ -86,6 +86,7 @@ class EnquiryController extends Controller
      *      defaults={"_format" = "json"}
      * )
      * @Method({"GET"})
+     * @Secure(roles="ROLE_ADMIN")
      */
     public function getEnquiryAction(Request $request, $id)
     {
@@ -107,80 +108,13 @@ class EnquiryController extends Controller
 
 
     /**
-     * Action to create an enquiry
-     * @Route(".{_format}", name="bdk_enquiry_post", requirements={"_format" = "json|xml"},
-     *      defaults={"_format" = "json"}
-     * )
-     * @Method({"POST"})
-     */
-    public function postEnquiryAction(Request $request)
-    {
-        $serializer = $this->get('serializer');
-        $em = $this->container->get('bdk.enquiry.manager');
-
-        $form = $this->createForm(new EnquiryFormType(), $em->create());
-        $formHandler = new EnquiryFormHandler($form, $request->request->all(), $em);
-
-        if ($formHandler->process()) {
-            return new Response(
-                $serializer->serialize($form->getData(), $request->getRequestFormat()),
-                201,
-                array('Content-Type' => "application/{$request->getRequestFormat()}")
-            );
-        }
-
-        return new Response(
-            $serializer->serialize($formHandler->getErrorsArray(), $request->getRequestFormat()),
-            400,
-            array('Content-Type' => "application/{$request->getRequestFormat()}")
-        );
-    }
-
-
-    /**
-     * Action to create an enquiry
-     * @Route("/{id}.{_format}", name="bdk_enquiry_post", requirements={"_format" = "json|xml"},
-     *      defaults={"_format" = "json"}
-     * )
-     * @Method({"PUT"})
-     */
-    public function putEnquiryAction(Request $request, $id)
-    {
-        $serializer = $this->get('serializer');
-        $em = $this->container->get('bdk.enquiry.manager');
-
-        $enquiry = $em->getRepository()->findOneById($id);
-
-        if (null === $enquiry) {
-            return new Response(null, 404, array('Content-Type' => "application/{$request->getRequestFormat()}"));
-        }
-
-        $form = $this->createForm(new EnquiryFormType(), $enquiry);
-        $formHandler = new EnquiryFormHandler($form, $request->request->all(), $em);
-
-        if ($formHandler->process()) {
-            return new Response(
-                $serializer->serialize($form->getData(), $request->getRequestFormat()),
-                201,
-                array('Content-Type' => "application/{$request->getRequestFormat()}")
-            );
-        }
-
-        return new Response(
-            $serializer->serialize($formHandler->getErrorsArray(), $request->getRequestFormat()),
-            400,
-            array('Content-Type' => "application/{$request->getRequestFormat()}")
-        );
-    }
-
-
-    /**
      * Delete an enquiry
      *
      * @Route("/{id}.{_format}", name="bdk_enquiry_delete", requirements={"_format" = "json|xml"},
      *      defaults={"_format" = "json"}
      * )
      * @Method({"DELETE"})
+     * @Secure(roles="ROLE_ADMIN")
      */
     public function deleteEnquiryAction(Request $request, $id)
     {

@@ -22,6 +22,8 @@ BDK\EnquiryBundle\Document\Enquiry:
       gedmo:
         timestampable:
           on: update
+    user:
+      type: string
 
   embedMany:
     responses:

@@ -20,3 +20,7 @@
 
 bdk_enquiry_enquiry:
     resource: BDK\EnquiryBundle\Controller\EnquiryController
+
+
+bdk_enquiry_user_enquiry:
+    resource: BDK\EnquiryBundle\Controller\UserEnquiryController
