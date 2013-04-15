@@ -48,56 +48,6 @@ class EnquiryManagerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($name, $enquiry->getName());
     }
 
-    public function testGetEnquiryFor()
-    {
-        $this->setUpEnquiryRepository();
-
-        $enquiry = $this->enquiryManager->getEnquiryFor($this->about);
-
-        $this->assertEquals($enquiry->getName(), 'test');
-    }
-
-    public function testGetEnquiriesFor()
-    {
-        $this->setUpEnquiryRepository();
-
-        $enquiries = $this->enquiryManager->getEnquiriesFor($this->about);
-
-        $this->assertCount(1, $enquiries);
-    }
-
-    public function testGetEnquiriesForFormatted()
-    {
-        $this->setUpEnquiryRepository();
-
-        $enquiries = $this->enquiryManager->getEnquiriesFor($this->about, 'json');
-
-        $test = json_decode($enquiries);
-
-        $this->assertEquals(json_last_error(), JSON_ERROR_NONE);
-        $this->assertCount(1, $test);
-        $this->assertEquals($test[0]->enquiry->name, 'test');
-
-    }
-
-    public function testGetEnquiryByName()
-    {
-        $this->setUpObjectRepository();
-
-        $enquiry = $this->enquiryManager->getEnquiryByName('test');
-
-        $this->assertEquals($enquiry->getName(), 'test');
-    }
-
-    public function testGetEnquiryById()
-    {
-        $this->setUpObjectRepository();
-
-        $enquiry = $this->enquiryManager->getEnquiry('test');
-
-        $this->assertEquals($enquiry->getName(), 'test');
-    }
-
     public function testDeleteEnquiry()
     {
         $this->objectManager->expects($this->once())->method('remove')->with($this->equalTo($this->enquiry));
@@ -170,28 +120,6 @@ class EnquiryManagerTest extends \PHPUnit_Framework_TestCase
 
     }
 
-    public function testSaveResponsesInJsonFormat()
-    {
-        $responses = '{"answer":{"responses":[{"key":"test","value":"test"}]}}';
-
-        $this->objectManager->expects($this->once())->method('persist')->with($this->equalTo($this->enquiry));
-
-        $this->enquiryManager->saveResponses($this->enquiry, $responses);
-
-        $this->assertCount(2, $this->enquiry->getAnswers());
-        $this->assertCount(1, $this->enquiry->getAnswers()->last()->getResponses());
-    }
-
-    public function testSaveResponsesInBadJsonFormat()
-    {
-        $responses = '{}';
-
-        $this->setExpectedException('Symfony\Component\Serializer\Exception\InvalidArgumentException');
-
-        $this->enquiryManager->saveResponses($this->enquiry, $responses);
-
-    }
-
     public function testSaveResponsesWithAnyArray()
     {
         $responses = array(new \stdClass());
@@ -202,21 +130,12 @@ class EnquiryManagerTest extends \PHPUnit_Framework_TestCase
 
     }
 
-    protected function createAnswer()
-    {
-        $answer = $this->getMockForAbstractClass('BDK\EnquiryBundle\Model\Answer');
-
-        $answer->addResponse($this->createResponse());
-
-        return $answer;
-    }
-
     protected function createResponse()
     {
         $response = $this->getMockForAbstractClass('BDK\EnquiryBundle\Model\Response');
 
-        $response->setKey('test');
-        $response->setValue('test');
+        $response->setQuestion('question');
+        $response->setAnswer('answer');
 
         return $response;
     }

@@ -3,8 +3,8 @@ BDK\EnquiryBundle\Entity\Enquiry:
   repositoryClass: BDK\EnquiryBundle\Doctrine\ORM\Repository\EnquiryRepository
   table: enquiry
   indexes:
-    name_index:
-      columns: [name]
+    type_index:
+      columns: [type]
     about_index:
       columns: [about]
   fields:
@@ -13,23 +13,25 @@ BDK\EnquiryBundle\Entity\Enquiry:
       id: true
       generator:
         strategy: AUTO
-    name:
+    type:
       type: string
       length: 255
+      nullable: false
+    createdAt:
+      type: datetime
+      nullable: false
+      column: created_at
+    updatedAt:
+      type: datetime
       nullable: true
-      unique: true
-    form:
-      type: string
-      length: 255
-      nullable: true
+      column: updated_at
     about:
       type: string
       length: 255
 
-
   oneToMany:
-    answers:
-      targetEntity: Answer
+    responses:
+      targetEntity: Response
       mappedBy: enquiry
       cascade: ["persist", "remove"]
 

@@ -14,7 +14,7 @@ namespace BDK\EnquiryBundle\Document;
 use BDK\EnquiryBundle\Model\Response as BaseResponse;
 
 /**
- * Response document
+ * Enquiry document, where business objects ("about") and answers are related
  */
 class Response extends BaseResponse
 {
