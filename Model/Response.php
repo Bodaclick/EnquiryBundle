@@ -11,61 +11,105 @@
 
 namespace BDK\EnquiryBundle\Model;
 
+/**
+ * Class Response
+ *
+ * @package BDK\EnquiryBundle\Model
+ */
 abstract class Response
 {
     /**
-     * @var string Key to identify the response
-     */
-    protected $key;
-
-    /**
-     * @var string Value of the response.
-     */
-    protected $value;
-
-    /**
-     * Set key
+     * @var integer
      *
-     * @param  string   $key
+     */
+    protected $id;
+
+    /**
+     * @var string Question to identify the response
+     */
+    protected $question;
+
+    /**
+     * @var string Answer of the response.
+     */
+    protected $answer;
+
+    /**
+     * @var Enquiry $enquiry
+     */
+    protected $enquiry;
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set question
+     *
+     * @param  string   $question
      * @return Response
      */
-    public function setKey($key)
+    public function setQuestion($question)
     {
-        $this->key = $key;
+        $this->question = $question;
 
         return $this;
     }
 
     /**
-     * Get key
+     * Get question
      *
      * @return string
      */
-    public function getKey()
+    public function getQuestion()
     {
-        return $this->key;
+        return $this->question;
     }
 
     /**
-     * Set value
+     * Set answer
      *
-     * @param  string   $value
+     * @param  string   $answer
      * @return Response
      */
-    public function setValue($value)
+    public function setAnswer($answer)
     {
-        $this->value = $value;
-
+        $this->answer = $answer;
         return $this;
     }
 
     /**
-     * Get value
+     * Get answer
      *
-     * @return string $value
+     * @return string $answer
      */
-    public function getValue()
+    public function getAnswer()
     {
-        return $this->value;
+        return $this->answer;
+    }
+
+    /**
+     * @return \BDK\EnquiryBundle\Model\Enquiry
+     */
+    public function getEnquiry()
+    {
+        return $this->enquiry;
+    }
+
+    /**
+     * @param \BDK\EnquiryBundle\Model\Enquiry $enquiry
+     *
+     * @return Response
+     */
+    public function setEnquiry($enquiry)
+    {
+        $this->enquiry = $enquiry;
+        return $this;
     }
 }
