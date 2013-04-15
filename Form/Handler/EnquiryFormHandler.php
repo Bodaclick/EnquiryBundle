@@ -2,7 +2,10 @@
 
 namespace BDK\EnquiryBundle\Form\Handler;
 
+use BDK\EnquiryBundle\Events\EnquiryEvent;
+use BDK\EnquiryBundle\Events\Events;
 use BDK\EnquiryBundle\Model\Manager\EnquiryManager;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\FormInterface;
 
 /**
@@ -29,15 +32,26 @@ class EnquiryFormHandler
     protected $em;
 
     /**
-     * @param \Symfony\Component\Form\FormInterface $form
-     * @param array                                 $params
-     * @param \Doctrine\ORM\EntityManager           $em
+     * @var \Symfony\Component\EventDispatcher\EventDispatcherInterface
      */
-    public function __construct(FormInterface $form, array $params, EnquiryManager $em)
-    {
+    protected $dispatcher;
+
+    /**
+     * @param FormInterface            $form
+     * @param array                    $params
+     * @param EnquiryManager           $em
+     * @param EventDispatcherInterface $dispatcher
+     */
+    public function __construct(
+        FormInterface $form,
+        array $params,
+        EnquiryManager $em,
+        EventDispatcherInterface $dispatcher
+    ) {
         $this->form = $form;
         $this->params = $params;
         $this->em = $em;
+        $this->dispatcher = $dispatcher;
     }
 
     /**
@@ -53,7 +67,13 @@ class EnquiryFormHandler
             return false;
         }
 
+        $event = new EnquiryEvent($this->form->getData());
+
+        $this->dispatcher->dispatch(Events::PRE_PERSIST, $event);
+
         $this->em->update($this->form->getData());
+
+        $this->dispatcher->dispatch(Events::POST_PERSIST, $event);
 
         return true;
     }

@@ -2,9 +2,6 @@ parameters:
    bdk.enquiry.api.supported_formats: json|xml
 
 services:
-#    bdk.enquiry.manager:
-#        class: BDK\EnquiryBundle\Model\EnquiryManager
-#        arguments: [ @bdk.enquiry.object_manager, @event_dispatcher, %bdk.enquiry.default_response_class%, %bdk.enquiry.responses_classes%]
 
     bdk.enquiry.manager:
         class: BDK\EnquiryBundle\Model\Manager\EnquiryManager
@@ -14,12 +11,6 @@ services:
 
     bdk.enquiry.service:
         alias: bdk.enquiry.manager
-
-    bdk.enquiry.controller:
-        class: BDK\EnquiryBundle\Controller\EnquiryController
-        arguments: [ @bdk.enquiry.manager, @security.context]
-
-
 
     bdk.enquiry.form.type.response:
         class: BDK\EnquiryBundle\Form\Type\ResponseFormType
