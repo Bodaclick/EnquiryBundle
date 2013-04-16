@@ -42,7 +42,7 @@ class TableNamePrefixListenerTest extends \PHPUnit_Framework_TestCase
 
         $this->event = new \Doctrine\ORM\Event\LoadClassMetadataEventArgs($this->metadata, $this->entityManager);
 
-        $this->listener = new \Bodaclick\BDKEnquiryBundle\Doctrine\ORM\EventListener\TableNamePrefixListener('prefix');
+        $this->listener = new \BDK\EnquiryBundle\Doctrine\ORM\EventListener\TableNamePrefixListener('prefix');
 
     }
 
@@ -50,7 +50,7 @@ class TableNamePrefixListenerTest extends \PHPUnit_Framework_TestCase
     {
         $this->reflectionClass->expects($this->any())
             ->method('getNamespaceName')
-            ->will($this->returnValue('Bodaclick\BDKEnquiryBundle\Entity'));
+            ->will($this->returnValue('BDK\EnquiryBundle\Entity'));
 
         $this->listener->loadClassMetadata($this->event);
 

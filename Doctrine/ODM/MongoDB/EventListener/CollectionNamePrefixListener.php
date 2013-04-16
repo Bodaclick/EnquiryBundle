@@ -40,7 +40,7 @@ class CollectionNamePrefixListener
         $classMetadata = $args->getClassMetadata();
 
         //Only set the prefix to the bundle entities
-        if ($classMetadata->getReflectionClass()->getNamespaceName()!== 'Bodaclick\BDKEnquiryBundle\Document') {
+        if ($classMetadata->getReflectionClass()->getNamespaceName()!== 'BDK\EnquiryBundle\Document') {
             return;
         }
 

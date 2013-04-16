@@ -28,7 +28,7 @@ class UserAssociationListenerTest extends \PHPUnit_Framework_TestCase
 
         $this->metadata->expects($this->any())
             ->method('getName')
-            ->will($this->returnValue('Bodaclick\BDKEnquiryBundle\Entity\Answer'));
+            ->will($this->returnValue('BDK\EnquiryBundle\Entity\Answer'));
 
     }
 
@@ -36,7 +36,7 @@ class UserAssociationListenerTest extends \PHPUnit_Framework_TestCase
     {
         $event = new \Doctrine\ORM\Event\LoadClassMetadataEventArgs($this->metadata, $this->entityManager);
 
-        $listener = new \Bodaclick\BDKEnquiryBundle\Doctrine\ORM\EventListener\UserAssociationListener('UserClass');
+        $listener = new \BDK\EnquiryBundle\Doctrine\ORM\EventListener\UserAssociationListener('UserClass');
 
         $this->metadata->expects($this->once())
                        ->method('mapOneToOne');

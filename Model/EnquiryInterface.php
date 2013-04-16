@@ -11,11 +11,16 @@
 
 namespace BDK\EnquiryBundle\Model;
 
+/**
+ * Class EnquiryInterface
+ *
+ * @package BDK\EnquiryBundle\Model
+ */
 interface EnquiryInterface
 {
-    public function getAnswers();
+    public function getResponses();
 
-    public function getForm();
+    public function getType();
 
     public function getAbout();
 }

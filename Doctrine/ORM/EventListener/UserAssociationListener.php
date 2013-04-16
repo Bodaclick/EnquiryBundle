@@ -37,7 +37,7 @@ class UserAssociationListener
     {
         $classMetadata = $args->getClassMetadata();
 
-        if ($classMetadata->getName()!=='Bodaclick\BDKEnquiryBundle\Entity\Answer') {
+        if ($classMetadata->getName()!=='BDK\EnquiryBundle\Entity\Answer') {
             return;
         }
 

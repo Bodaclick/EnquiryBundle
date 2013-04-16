@@ -1,4 +1,4 @@
-BDKEnquiryBundle
+EnquiryBundle
 ================
 
 The BDKEnquiryBundle is intended to be able to handle any form input and relate it to a class in your system.

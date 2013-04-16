@@ -41,7 +41,7 @@ class TableNamePrefixListener
         $classMetadata = $args->getClassMetadata();
 
         //Only set the prefix to the bundle entities
-        if ($classMetadata->getReflectionClass()->getNamespaceName()!== 'Bodaclick\BDKEnquiryBundle\Entity') {
+        if ($classMetadata->getReflectionClass()->getNamespaceName()!== 'BDK\EnquiryBundle\Entity') {
             return;
         }
 

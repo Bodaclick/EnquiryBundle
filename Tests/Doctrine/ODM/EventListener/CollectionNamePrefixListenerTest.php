@@ -11,7 +11,7 @@
 
 namespace BDK\EnquiryBundle\Tests\Doctrine\ODM\EventListener;
 
-use Bodaclick\BDKEnquiryBundle\Doctrine\ODM\MongoDB\EventListener\CollectionNamePrefixListener;
+use BDK\EnquiryBundle\Doctrine\ODM\MongoDB\EventListener\CollectionNamePrefixListener;
 use Doctrine\ODM\MongoDB\Event\LoadClassMetadataEventArgs;
 
 class CollectionNamePrefixListenerTest extends \PHPUnit_Framework_TestCase
@@ -53,7 +53,7 @@ class CollectionNamePrefixListenerTest extends \PHPUnit_Framework_TestCase
     {
         $this->reflectionClass->expects($this->any())
             ->method('getNamespaceName')
-            ->will($this->returnValue('Bodaclick\BDKEnquiryBundle\Document'));
+            ->will($this->returnValue('BDK\EnquiryBundle\Document'));
 
         $this->listener->loadClassMetadata($this->event);
 

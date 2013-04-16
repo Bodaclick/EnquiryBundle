@@ -1,7 +1,7 @@
-Bodaclick\BDKEnquiryBundle\Document\Response:
+BDK\EnquiryBundle\Document\Response:
   type: embeddedDocument
   fields:
-    key:
+    question:
       type: string
-    value:
+    answer:
       type: string

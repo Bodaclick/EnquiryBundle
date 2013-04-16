@@ -11,7 +11,7 @@
 
 namespace BDK\EnquiryBundle\Tests\Doctrine\ORM\EventListener;
 
-use Bodaclick\BDKEnquiryBundle\DependencyInjection\InheritanceTypes;
+use BDK\EnquiryBundle\DependencyInjection\InheritanceTypes;
 
 class ResponseMappingListenerTest extends \PHPUnit_Framework_TestCase
 {
@@ -52,7 +52,7 @@ class ResponseMappingListenerTest extends \PHPUnit_Framework_TestCase
 
     public function testLoadClassMetadataWithMultipleResponses()
     {
-        $listener = new \Bodaclick\BDKEnquiryBundle\Doctrine\ORM\EventListener\ResponseMappingListener(
+        $listener = new \BDK\EnquiryBundle\Doctrine\ORM\EventListener\ResponseMappingListener(
             'DefaultResponse', array('other'=>'OtherResponse'), InheritanceTypes::SINGLE
         );
 
@@ -70,7 +70,7 @@ class ResponseMappingListenerTest extends \PHPUnit_Framework_TestCase
 
     public function testLoadClassMetadataWithNoDefaultClass()
     {
-        $listener = new \Bodaclick\BDKEnquiryBundle\Doctrine\ORM\EventListener\ResponseMappingListener(
+        $listener = new \BDK\EnquiryBundle\Doctrine\ORM\EventListener\ResponseMappingListener(
             'OtherDefaultResponse', array('other'=>'OtherResponse'), InheritanceTypes::SINGLE
         );
 
@@ -82,7 +82,7 @@ class ResponseMappingListenerTest extends \PHPUnit_Framework_TestCase
 
     public function testLoadClassMetadataWithEmptyResponses()
     {
-        $listener = new \Bodaclick\BDKEnquiryBundle\Doctrine\ORM\EventListener\ResponseMappingListener(
+        $listener = new \BDK\EnquiryBundle\Doctrine\ORM\EventListener\ResponseMappingListener(
             'DefaultResponse', array(), InheritanceTypes::SINGLE
         );
 
@@ -97,7 +97,7 @@ class ResponseMappingListenerTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('\LogicException');
 
         //The response list is wrong
-        $listener = new \Bodaclick\BDKEnquiryBundle\Doctrine\ORM\EventListener\ResponseMappingListener(
+        $listener = new \BDK\EnquiryBundle\Doctrine\ORM\EventListener\ResponseMappingListener(
             'DefaultResponse', array('other'=>'DefaultResponse'), InheritanceTypes::SINGLE
         );
 
