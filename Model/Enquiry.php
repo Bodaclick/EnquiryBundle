@@ -40,6 +40,11 @@ abstract class Enquiry implements EnquiryInterface, NormalizableInterface
     protected $about;
 
     /**
+     * @var string
+     */
+    protected $status = 'pending';
+
+    /**
      * @var DateTime
      */
     protected $createdAt;
@@ -238,6 +243,25 @@ abstract class Enquiry implements EnquiryInterface, NormalizableInterface
     public function setUpdatedAt($updatedAt)
     {
         $this->updatedAt = $updatedAt;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * @param string $status
+     *
+     * @return Enquiry
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
         return $this;
     }
 }
