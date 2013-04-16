@@ -10,6 +10,8 @@ BDK\EnquiryBundle\Document\Enquiry:
       type: string
     about:
       type: string
+    status:
+      type: string
     createdAt:
       type: date
       column: created_at
