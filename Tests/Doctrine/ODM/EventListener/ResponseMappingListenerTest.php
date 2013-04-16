@@ -31,7 +31,7 @@ class ResponseMappingListenerTest extends \PHPUnit_Framework_TestCase
 
         $this->metadata->expects($this->any())
             ->method('getName')
-            ->will($this->returnValue('Bodaclick\BDKEnquiryBundle\Document\Answer'));
+            ->will($this->returnValue('BDK\EnquiryBundle\Document\Answer'));
 
         $this->event = new LoadClassMetadataEventArgs($this->metadata, $this->documentManager);
 
@@ -39,7 +39,7 @@ class ResponseMappingListenerTest extends \PHPUnit_Framework_TestCase
 
     public function testLoadClassMetadataWithMultipleResponses()
     {
-        $listener = new \Bodaclick\BDKEnquiryBundle\Doctrine\ODM\MongoDB\EventListener\ResponseMappingListener(
+        $listener = new \BDK\EnquiryBundle\Doctrine\ODM\MongoDB\EventListener\ResponseMappingListener(
             'DefaultResponse', array('other'=>'OtherResponse')
         );
 
@@ -60,7 +60,7 @@ class ResponseMappingListenerTest extends \PHPUnit_Framework_TestCase
 
     public function testLoadClassMetadataWithEmptyResponses()
     {
-        $listener = new \Bodaclick\BDKEnquiryBundle\Doctrine\ODM\MongoDB\EventListener\ResponseMappingListener(
+        $listener = new \BDK\EnquiryBundle\Doctrine\ODM\MongoDB\EventListener\ResponseMappingListener(
             'DefaultResponse', array()
         );
 

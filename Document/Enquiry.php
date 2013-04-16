@@ -11,7 +11,7 @@
 
 namespace BDK\EnquiryBundle\Document;
 
-use Bodaclick\BDKEnquiryBundle\Model\Enquiry as BaseEnquiry;
+use BDK\EnquiryBundle\Model\Enquiry as BaseEnquiry;
 
 /**
  * Enquiry document, where business objects ("about") and answers are related

@@ -2,13 +2,19 @@ parameters:
    bdk.enquiry.api.supported_formats: json|xml
 
 services:
+
     bdk.enquiry.manager:
-        class: Bodaclick\BDKEnquiryBundle\Model\EnquiryManager
-        arguments: [ @bdk.enquiry.object_manager, @event_dispatcher, %bdk.enquiry.default_response_class%, %bdk.enquiry.responses_classes%]
+        class: BDK\EnquiryBundle\Model\Manager\EnquiryManager
+        arguments:
+            - @bdk.enquiry.object_manager
+            - BDKEnquiryBundle:Enquiry
 
     bdk.enquiry.service:
         alias: bdk.enquiry.manager
 
-    bdk.enquiry.controller:
-        class: Bodaclick\BDKEnquiryBundle\Controller\EnquiryController
-        arguments: [ @bdk.enquiry.manager, @security.context]
+    bdk.enquiry.form.type.response:
+        class: BDK\EnquiryBundle\Form\Type\ResponseFormType
+        arguments:
+            - %bdk.enquiry.default_response_class%
+        tags:
+            - { name: form.type, alias: response }

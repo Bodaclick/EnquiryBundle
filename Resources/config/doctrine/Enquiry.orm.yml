@@ -1,10 +1,10 @@
-Bodaclick\BDKEnquiryBundle\Entity\Enquiry:
+BDK\EnquiryBundle\Entity\Enquiry:
   type: entity
-  repositoryClass: Bodaclick\BDKEnquiryBundle\Doctrine\ORM\Repository\EnquiryRepository
+  repositoryClass: BDK\EnquiryBundle\Doctrine\ORM\Repository\EnquiryRepository
   table: enquiry
   indexes:
-    name_index:
-      columns: [name]
+    type_index:
+      columns: [type]
     about_index:
       columns: [about]
   fields:
@@ -13,23 +13,29 @@ Bodaclick\BDKEnquiryBundle\Entity\Enquiry:
       id: true
       generator:
         strategy: AUTO
-    name:
+    type:
       type: string
       length: 255
-      nullable: true
-      unique: true
-    form:
+      nullable: false
+    status:
       type: string
-      length: 255
+      length: 64
+      nullable: false
+    createdAt:
+      type: datetime
+      nullable: false
+      column: created_at
+    updatedAt:
+      type: datetime
       nullable: true
+      column: updated_at
     about:
       type: string
       length: 255
 
-
   oneToMany:
-    answers:
-      targetEntity: Answer
+    responses:
+      targetEntity: Response
       mappedBy: enquiry
       cascade: ["persist", "remove"]
 

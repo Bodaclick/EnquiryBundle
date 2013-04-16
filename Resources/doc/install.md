@@ -35,7 +35,7 @@ public function registerBundles()
 {
     $bundles = array(
         // ...
-        new Bodaclick\BDKEnquiryBundle\BDKEnquiryBundle(),
+        new BDK\EnquiryBundle\BDKEnquiryBundle(),
     );
 }
 ```

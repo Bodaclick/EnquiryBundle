@@ -3,7 +3,7 @@
 namespace BDK\EnquiryBundle\Events;
 
 use Symfony\Component\EventDispatcher\Event;
-use Bodaclick\BDKEnquiryBundle\Model\Enquiry;
+use BDK\EnquiryBundle\Model\Enquiry;
 
 /**
  * Event dispatched in Enquiry Service
