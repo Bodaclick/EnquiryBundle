@@ -3,13 +3,6 @@ parameters:
       default: BDK\EnquiryBundle\Entity\Response
 
 services:
-    bdk.user_asocciation.listener:
-        class: BDK\EnquiryBundle\Doctrine\ORM\EventListener\UserAssociationListener
-        arguments: [ %bdk.user_class%]
-        public: false
-        tags:
-            - { name: doctrine.event_listener, event: loadClassMetadata}
-
     bdk.response_mapping.listener:
         class: BDK\EnquiryBundle\Doctrine\ORM\EventListener\ResponseMappingListener
         public: false
