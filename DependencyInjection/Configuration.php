@@ -44,7 +44,6 @@ class Configuration implements ConfigurationInterface
                 ->isRequired()
                 ->cannotBeEmpty()
             ->end()
-            ->scalarNode('user_class')->isRequired()->cannotBeEmpty()->end()
             ->arrayNode('responses')
                 ->addDefaultsIfNotSet()
                 ->children()

@@ -32,6 +32,9 @@ BDK\EnquiryBundle\Entity\Enquiry:
     about:
       type: string
       length: 255
+    user:
+      type: string
+      length: 255
 
   oneToMany:
     responses:
