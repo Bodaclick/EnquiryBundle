@@ -26,14 +26,12 @@ class EnquiryFormType extends AbstractType
     {
         $builder
             ->add('type', 'text')
+            ->add('status', 'text')
             ->add(
                 'about',
                 'text',
                 array(
-                    'error_bubbling' => true,
-                    'constraints' => [
-                        new Url(['message' => "The about field is not a valid URL"])
-                    ]
+                    'error_bubbling' => true
                 )
             )
             ->add(

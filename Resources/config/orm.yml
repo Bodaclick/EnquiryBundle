@@ -11,16 +11,6 @@ services:
         class: BDK\EnquiryBundle\Doctrine\ORM\EventListener\TableNamePrefixListener
         public: false
 
-    bdk.link_about.listener:
-        class: BDK\EnquiryBundle\Doctrine\ORM\EventListener\LinkAboutListener
-        public: false
-        tags:
-            - { name: doctrine.event_listener, event: prePersist}
-            - { name: doctrine.event_listener, event: preUpdate}
-            - { name: doctrine.event_listener, event: postLoad}
-            - { name: doctrine.event_listener, event: postPersist}
-
-
     bdk.enquiry.object_manager:
         class: Doctrine\ORM\EntityManager
         factory_service: doctrine
