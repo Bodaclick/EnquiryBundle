@@ -134,6 +134,15 @@ abstract class Enquiry implements EnquiryInterface, NormalizableInterface
     }
 
     /**
+     * Remove an answer
+     * @param Response $response
+     */
+    public function removeResponse(Response $response)
+    {
+        $this->responses->removeElement($response);
+    }
+
+    /**
      * Set about
      *
      * @param  mixed   $about Can be an string representation or a AboutInterface object
