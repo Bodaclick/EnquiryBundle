@@ -26,14 +26,12 @@ class EnquiryFormType extends AbstractType
     {
         $builder
             ->add('type', 'text')
+            ->add('status', 'text')
             ->add(
                 'about',
                 'text',
                 array(
-                    'error_bubbling' => true,
-                    'constraints' => [
-                        new Url(['message' => "The about field is not a valid URL"])
-                    ]
+                    'error_bubbling' => true
                 )
             )
             ->add(
@@ -42,7 +40,8 @@ class EnquiryFormType extends AbstractType
                 array(
                     'type' => 'response',
                     'allow_add'    => true,
-                    'allow_delete' => true
+                    'allow_delete' => true,
+                    'by_reference' => false
                 )
             );
     }
@@ -56,7 +55,7 @@ class EnquiryFormType extends AbstractType
     {
         $resolver->setDefaults(
             array(
-                'csrf_protection' => false,
+                'csrf_protection' => false
             )
         );
     }
