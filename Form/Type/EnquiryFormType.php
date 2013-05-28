@@ -40,7 +40,8 @@ class EnquiryFormType extends AbstractType
                 array(
                     'type' => 'response',
                     'allow_add'    => true,
-                    'allow_delete' => true
+                    'allow_delete' => true,
+                    'by_reference' => false
                 )
             );
     }
@@ -54,7 +55,7 @@ class EnquiryFormType extends AbstractType
     {
         $resolver->setDefaults(
             array(
-                'csrf_protection' => false,
+                'csrf_protection' => false
             )
         );
     }
