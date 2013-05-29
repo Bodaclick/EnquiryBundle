@@ -2,7 +2,7 @@
     "name": "bodaclick/enquiry-bundle",
     "type": "symfony-bundle",
     "description": "Bundle to handle enquiries and their answers",
-    "keywords": ["enquiry"],
+    "keywords": ["enquiry", "enquiries", "backend"],
     "homepage": "http://bodaclick.github.com",
     "license": "MIT",
     "minimum-stability": "dev",
@@ -10,15 +10,15 @@
         "php": ">=5.3.2",
         "symfony/framework-bundle": ">=2.1,<2.3-dev",
         "symfony/serializer": "2.1.*@dev",
-        "symfony/security-bundle": ">=2.1,<2.3-dev"
+        "symfony/security-bundle": ">=2.1,<2.3-dev",
+        "doctrine/mongodb-odm-bundle": "3.0.*",
+        "doctrine/mongodb-odm": ">=1.0.0-beta5,<1.1-dev"
     },
     "require-dev": {
     	"doctrine/doctrine-bundle": "*",
-    	"doctrine/mongodb-odm-bundle": "3.0.*",
-        "doctrine/mongodb-odm": ">=1.0.0-beta5,<1.1-dev",
     	"doctrine/orm": ">=2.2.3,<2.4-dev"
     },
-    
+
     "autoload": {
         "psr-0": { "BDK\\EnquiryBundle": "" }
     },

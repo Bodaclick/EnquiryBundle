@@ -3,13 +3,6 @@ parameters:
       default: BDK\EnquiryBundle\Entity\Response
 
 services:
-    bdk.user_asocciation.listener:
-        class: BDK\EnquiryBundle\Doctrine\ORM\EventListener\UserAssociationListener
-        arguments: [ %bdk.user_class%]
-        public: false
-        tags:
-            - { name: doctrine.event_listener, event: loadClassMetadata}
-
     bdk.response_mapping.listener:
         class: BDK\EnquiryBundle\Doctrine\ORM\EventListener\ResponseMappingListener
         public: false
@@ -17,16 +10,6 @@ services:
     bdk.db_prefix.listener:
         class: BDK\EnquiryBundle\Doctrine\ORM\EventListener\TableNamePrefixListener
         public: false
-
-    bdk.link_about.listener:
-        class: BDK\EnquiryBundle\Doctrine\ORM\EventListener\LinkAboutListener
-        public: false
-        tags:
-            - { name: doctrine.event_listener, event: prePersist}
-            - { name: doctrine.event_listener, event: preUpdate}
-            - { name: doctrine.event_listener, event: postLoad}
-            - { name: doctrine.event_listener, event: postPersist}
-
 
     bdk.enquiry.object_manager:
         class: Doctrine\ORM\EntityManager
