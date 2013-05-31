@@ -55,6 +55,16 @@ abstract class Enquiry implements EnquiryInterface, NormalizableInterface
     protected $updatedAt;
 
     /**
+     * @var DateTime
+     */
+    protected $expiresAt;
+
+    /**
+     * @var boolean
+     */
+    protected $sent;
+
+    /**
      * @var Collection
      */
     protected $responses;
@@ -273,4 +283,38 @@ abstract class Enquiry implements EnquiryInterface, NormalizableInterface
         $this->status = $status;
         return $this;
     }
+
+    /**
+     * @param \BDK\EnquiryBundle\Model\DateTime $expiresAt
+     */
+    public function setExpiresAt($expiresAt)
+    {
+        $this->expiresAt = $expiresAt;
+    }
+
+    /**
+     * @return \BDK\EnquiryBundle\Model\DateTime
+     */
+    public function getExpiresAt()
+    {
+        return $this->expiresAt;
+    }
+
+    /**
+     * @param boolean $sent
+     */
+    public function setSent($sent)
+    {
+        $this->sent = $sent;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getSent()
+    {
+        return $this->sent;
+    }
+
+
 }

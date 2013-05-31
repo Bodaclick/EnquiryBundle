@@ -22,22 +22,16 @@ class EnquiryRepository extends EntityRepository implements EnquiryRepositoryInt
 {
 
     /**
-     * Gets all the enquiries associated with an object
+     * Gets all the enquiries associated with a list of users
      *
-     * @param  mixed $object
+     * @param  array $users
      * @return mixed
      */
-    public function getEnquiriesFor(AboutInterface $object)
+    public function getEnquiriesForUsers(array $users)
     {
-        //Generate the definition and find using the string generated
-        $metadata = $this->getEntityManager()->getClassMetadata(get_class($object));
-        $definition = json_encode(array("className"=>$metadata->getName(), "ids"=>$metadata->getIdentifierValues($object)));
-
-        //Order from newer to older, so if we get the first one, we get the last enquiry saved
         $qb=$this->createQueryBuilder('e')
-            ->where('e.about = :definition')
-            ->setParameter('definition', $definition)
-            ->orderBy('e.id','DESC');
+            ->where('e.user IN (:users)')
+            ->setParameter('users', $users);
 
         return $qb->getQuery()->execute();
     }

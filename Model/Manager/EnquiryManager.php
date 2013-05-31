@@ -76,4 +76,12 @@ class EnquiryManager
             $this->om->flush();
         }
     }
+
+    /**
+     * Flush the data
+     */
+    public function flush()
+    {
+        $this->om->flush();
+    }
 }
