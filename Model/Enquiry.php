@@ -18,6 +18,12 @@ use Doctrine\Common\Collections\Collection;
 
 abstract class Enquiry implements EnquiryInterface, NormalizableInterface
 {
+    const STATUS_NEW = 'new';
+    const STATUS_PENDING = 'pending';
+    const STATUS_DISMISS = 'dismiss';
+    const STATUS_ACCEPTED = 'accepted';
+    const STATUS_REJECTED = 'rejected';
+
     /**
      * @var integer
      *
@@ -42,7 +48,7 @@ abstract class Enquiry implements EnquiryInterface, NormalizableInterface
     /**
      * @var string
      */
-    protected $status = 'pending';
+    protected $status;
 
     /**
      * @var DateTime
