@@ -13,5 +13,5 @@ namespace BDK\EnquiryBundle\Model;
 
 interface EnquiryRepositoryInterface
 {
-    public function getEnquiriesFor(AboutInterface $object);
+    public function getEnquiriesForUsers(array $users);
 }

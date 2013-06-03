@@ -24,6 +24,12 @@ BDK\EnquiryBundle\Document\Enquiry:
       gedmo:
         timestampable:
           on: update
+    expiresAt:
+      type: date
+      column: expires_at
+    sent:
+      type: boolean
+      column: sent
     user:
       type: string
 

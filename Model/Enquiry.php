@@ -18,6 +18,12 @@ use Doctrine\Common\Collections\Collection;
 
 abstract class Enquiry implements EnquiryInterface, NormalizableInterface
 {
+    const STATUS_NEW = 'new';
+    const STATUS_PENDING = 'pending';
+    const STATUS_DISMISS = 'dismiss';
+    const STATUS_ACCEPTED = 'accepted';
+    const STATUS_REJECTED = 'rejected';
+
     /**
      * @var integer
      *
@@ -42,7 +48,7 @@ abstract class Enquiry implements EnquiryInterface, NormalizableInterface
     /**
      * @var string
      */
-    protected $status = 'pending';
+    protected $status;
 
     /**
      * @var DateTime
@@ -53,6 +59,16 @@ abstract class Enquiry implements EnquiryInterface, NormalizableInterface
      * @var DateTime
      */
     protected $updatedAt;
+
+    /**
+     * @var DateTime
+     */
+    protected $expiresAt;
+
+    /**
+     * @var boolean
+     */
+    protected $sent;
 
     /**
      * @var Collection
@@ -273,4 +289,38 @@ abstract class Enquiry implements EnquiryInterface, NormalizableInterface
         $this->status = $status;
         return $this;
     }
+
+    /**
+     * @param \BDK\EnquiryBundle\Model\DateTime $expiresAt
+     */
+    public function setExpiresAt($expiresAt)
+    {
+        $this->expiresAt = $expiresAt;
+    }
+
+    /**
+     * @return \BDK\EnquiryBundle\Model\DateTime
+     */
+    public function getExpiresAt()
+    {
+        return $this->expiresAt;
+    }
+
+    /**
+     * @param boolean $sent
+     */
+    public function setSent($sent)
+    {
+        $this->sent = $sent;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getSent()
+    {
+        return $this->sent;
+    }
+
+
 }
