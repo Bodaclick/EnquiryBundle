@@ -11,6 +11,7 @@
 
 namespace BDK\EnquiryBundle\Model\Manager;
 
+use BDK\EnquiryBundle\Model\Enquiry;
 use Doctrine\Common\Persistence\ObjectManager;
 
 /**
@@ -47,9 +48,20 @@ class EnquiryManager
     /**
      * @return mixed
      */
-    public function create()
+    public function create($user, $about, $type, $expDate)
     {
-        return new $this->class();
+        $enquiry = new $this->class();
+
+        $enquiry->setCreatedAt(new \DateTime());
+        $enquiry->setExpiresAt($expDate);
+
+        $enquiry->setStatus(Enquiry::STATUS_NEW);
+        $enquiry->setUser($user);
+        $enquiry->setType($type);
+        $enquiry->setAbout($about);
+        $enquiry->setSent(false);
+
+        return $enquiry;
     }
 
     /**
@@ -75,5 +87,13 @@ class EnquiryManager
         if (true === $andFlush) {
             $this->om->flush();
         }
+    }
+
+    /**
+     * Flush the data
+     */
+    public function flush()
+    {
+        $this->om->flush();
     }
 }

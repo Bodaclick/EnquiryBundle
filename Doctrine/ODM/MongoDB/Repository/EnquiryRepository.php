@@ -21,21 +21,16 @@ use BDK\EnquiryBundle\Model\EnquiryRepositoryInterface;
 class EnquiryRepository extends DocumentRepository implements EnquiryRepositoryInterface
 {
     /**
-     * Gets all the enquiries associated with an object
+     * Gets all the enquiries associated with a list of users
      *
-     * @param  AboutInterface                                                       $object
+     * @param  array $users
      * @return array|bool|\Doctrine\MongoDB\ArrayIterator|\Doctrine\MongoDB\Cursor|
      *          \Doctrine\MongoDB\EagerCursor|int|mixed|\MongoCursor|null
      */
-    public function getEnquiriesFor(AboutInterface $object)
+    public function getEnquiriesForUsers(array $users)
     {
-        //Order from newer to older, so if we get the first one, we get the last enquiry saved
         $qb=$this->createQueryBuilder()
-            ->field('about.$id')->equals(new \MongoId($object->getId()))
-            ->sort('id','DESC');
-
-        //Disable check for indexes, because about reference cannot be indexed and throw an error otherwise
-        $qb->requireIndexes(false);
+            ->field('user')->in($users);
 
         return $qb->getQuery()->execute();
     }
