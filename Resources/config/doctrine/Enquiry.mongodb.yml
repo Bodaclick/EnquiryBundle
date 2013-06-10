@@ -38,9 +38,14 @@ BDK\EnquiryBundle\Document\Enquiry:
       targetDocument: Response
 
   indexes:
-    name:
+    type:
       keys:
         type: asc
       options:
         safe: true
         sparse: true
+    user:
+      keys:
+        user: asc
+      options:
+        safe: true
