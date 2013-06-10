@@ -205,7 +205,7 @@ abstract class Enquiry implements EnquiryInterface, NormalizableInterface
         $responses = array();
 
         foreach ($this->responses as $response) {
-            $responses[] = $normalizer->normalize($response,$format);
+            $responses[] = $normalizer->normalize($response, $format);
         }
 
         $normalized['responses'] = $responses;
@@ -321,6 +321,4 @@ abstract class Enquiry implements EnquiryInterface, NormalizableInterface
     {
         return $this->sent;
     }
-
-
 }

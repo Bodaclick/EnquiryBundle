@@ -53,7 +53,9 @@ class ResponseMappingListenerTest extends \PHPUnit_Framework_TestCase
     public function testLoadClassMetadataWithMultipleResponses()
     {
         $listener = new \BDK\EnquiryBundle\Doctrine\ORM\EventListener\ResponseMappingListener(
-            'DefaultResponse', array('other'=>'OtherResponse'), InheritanceTypes::SINGLE
+            'DefaultResponse',
+            array('other'=>'OtherResponse'),
+            InheritanceTypes::SINGLE
         );
 
         $this->metadata->expects($this->once())
@@ -71,7 +73,9 @@ class ResponseMappingListenerTest extends \PHPUnit_Framework_TestCase
     public function testLoadClassMetadataWithNoDefaultClass()
     {
         $listener = new \BDK\EnquiryBundle\Doctrine\ORM\EventListener\ResponseMappingListener(
-            'OtherDefaultResponse', array('other'=>'OtherResponse'), InheritanceTypes::SINGLE
+            'OtherDefaultResponse',
+            array('other'=>'OtherResponse'),
+            InheritanceTypes::SINGLE
         );
 
         $this->metadata->expects($this->never())
@@ -83,7 +87,9 @@ class ResponseMappingListenerTest extends \PHPUnit_Framework_TestCase
     public function testLoadClassMetadataWithEmptyResponses()
     {
         $listener = new \BDK\EnquiryBundle\Doctrine\ORM\EventListener\ResponseMappingListener(
-            'DefaultResponse', array(), InheritanceTypes::SINGLE
+            'DefaultResponse',
+            array(),
+            InheritanceTypes::SINGLE
         );
 
         $this->metadata->expects($this->never())
@@ -98,7 +104,9 @@ class ResponseMappingListenerTest extends \PHPUnit_Framework_TestCase
 
         //The response list is wrong
         $listener = new \BDK\EnquiryBundle\Doctrine\ORM\EventListener\ResponseMappingListener(
-            'DefaultResponse', array('other'=>'DefaultResponse'), InheritanceTypes::SINGLE
+            'DefaultResponse',
+            array('other'=>'DefaultResponse'),
+            InheritanceTypes::SINGLE
         );
 
         $this->metadata->expects($this->never())
@@ -106,5 +114,4 @@ class ResponseMappingListenerTest extends \PHPUnit_Framework_TestCase
 
         $listener->loadClassMetadata($this->event);
     }
-
 }

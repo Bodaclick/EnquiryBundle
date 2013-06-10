@@ -175,5 +175,4 @@ EOF;
 
         return  $parser->parse($yaml);
     }
-
 }
