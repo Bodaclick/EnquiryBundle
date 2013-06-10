@@ -32,6 +32,6 @@ class EnquiryRepository extends DocumentRepository implements EnquiryRepositoryI
         $qb=$this->createQueryBuilder()
             ->field('user')->in($users);
 
-        return $qb->getQuery()->execute();
+        return $qb->getQuery()->execute()->toArray();
     }
 }

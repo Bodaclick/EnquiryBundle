@@ -26,7 +26,8 @@ class EnquiryFormType extends AbstractType
     {
         $builder
             ->add('type', 'text')
-            ->add('status', 'text')
+            ->add('status', 'text', array('data'=>'new'))
+            ->add('sent','checkbox')
             ->add(
                 'about',
                 'text',
