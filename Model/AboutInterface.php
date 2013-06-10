@@ -13,5 +13,4 @@ namespace BDK\EnquiryBundle\Model;
 
 interface AboutInterface
 {
-
 }
