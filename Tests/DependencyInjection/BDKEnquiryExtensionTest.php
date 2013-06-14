@@ -42,15 +42,6 @@ class BDKEnquiryExtensionTest extends \PHPUnit_Framework_TestCase
         $loader->load(array($config), $this->configuration);
     }
 
-    public function testThrowsExceptionUnlessUserClassSet()
-    {
-        $this->setExpectedException('\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException');
-        $loader = new BDKEnquiryExtension();
-        $config = $this->getEmptyConfig();
-        unset($config['user_class']);
-        $loader->load(array($config), $this->configuration);
-    }
-
     public function testThrowsExceptionIfUnknownParameterSet()
     {
         $this->setExpectedException('\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException');
@@ -150,7 +141,6 @@ class BDKEnquiryExtensionTest extends \PHPUnit_Framework_TestCase
     protected function getEmptyConfig()
     {
         $yaml = <<<EOF
-user_class: Acme\DemoBundle\Document\User
 db_driver: mongodb
 EOF;
         $parser = new Parser();
@@ -161,7 +151,6 @@ EOF;
     protected function getFullConfig()
     {
         $yaml = <<<EOF
-user_class: Acme\DemoBundle\Entity\User
 db_driver: orm
 db_prefix: test
 responses:
