@@ -21,9 +21,6 @@ BDK\EnquiryBundle\Document\Enquiry:
     updatedAt:
       type: date
       column: updated_at
-      gedmo:
-        timestampable:
-          on: update
     expiresAt:
       type: date
       column: expires_at
