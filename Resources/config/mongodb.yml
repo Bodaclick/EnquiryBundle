@@ -13,6 +13,10 @@ services:
         class: BDK\EnquiryBundle\Doctrine\ODM\MongoDB\EventListener\ResponseMappingListener
         public: false
 
+    bdk.enquiry.repository_class.listener:
+        class: BDK\EnquiryBundle\Doctrine\ODM\MongoDB\EventListener\RepositoryClassListener
+        public: false
+
     bdk.db_prefix.listener:
         class: BDK\EnquiryBundle\Doctrine\ODM\MongoDB\EventListener\CollectionNamePrefixListener
         public: false

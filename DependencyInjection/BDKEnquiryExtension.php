@@ -38,6 +38,10 @@ class BDKEnquiryExtension extends Extension
         //Load configuration for the db_driver given
         $loader->load(sprintf('%s.yml', $driver));
 
+        //Repository Class
+        $this->setRepositoryClass($config['repository_class'], $driver, $container);
+
+
         //Load mapping of subclasses of Response
         $responseClasses = $config['responses']['mapping'];
         $inheritanceType = $config['responses']['inheritance'];
@@ -129,5 +133,22 @@ class BDKEnquiryExtension extends Extension
                 $def->addTag('doctrine_mongodb.odm.event_listener', array('event'=>'loadClassMetadata'));
                 break;
         }
+    }
+
+    protected function setRepositoryClass($repClass, $driver, $container)
+    {
+        if ($repClass == '') {
+            return;
+        }
+
+        $rflClass = new \ReflectionClass($repClass);
+
+        if (!$rflClass->implementsInterface('BDK\EnquiryBundle\Model\EnquiryRepositoryInterface')) {
+            throw new \InvalidArgumentException(
+                'Repository class must implement Model\EnquiryRepositoryInterface but '
+            );
+        }
+
+        $this->enableListener($container, 'bdk.enquiry.repository_class.listener', [$repClass], $driver);
     }
 }
