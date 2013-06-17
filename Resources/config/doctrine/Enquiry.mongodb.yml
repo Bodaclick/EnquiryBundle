@@ -46,3 +46,9 @@ BDK\EnquiryBundle\Document\Enquiry:
         user: asc
       options:
         safe: true
+    about:
+      keys:
+        about: asc
+      options:
+        safe: true
+        sparse: true

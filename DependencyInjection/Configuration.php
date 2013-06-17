@@ -44,6 +44,7 @@ class Configuration implements ConfigurationInterface
                 ->isRequired()
                 ->cannotBeEmpty()
             ->end()
+            ->scalarNode('repository_class')->isRequired()->end()
             ->arrayNode('responses')
                 ->addDefaultsIfNotSet()
                 ->children()
