@@ -133,6 +133,7 @@ class BDKEnquiryExtensionTest extends \PHPUnit_Framework_TestCase
     {
         $yaml = <<<EOF
 db_driver: mongodb
+repository_class: ~
 EOF;
         $parser = new Parser();
 
@@ -143,6 +144,7 @@ EOF;
     {
         $yaml = <<<EOF
 db_driver: orm
+repository_class: ~
 db_prefix: test
 responses:
     mapping:
