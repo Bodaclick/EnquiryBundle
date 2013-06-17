@@ -140,6 +140,7 @@ class BDKEnquiryExtension extends Extension
         if ($repClass == '') {
             return;
         }
+
         $rflClass = new \ReflectionClass($repClass);
 
         if (!$rflClass->implementsInterface('BDK\EnquiryBundle\Model\EnquiryRepositoryInterface')) {
@@ -147,7 +148,7 @@ class BDKEnquiryExtension extends Extension
                 'Repository class must implement Model\EnquiryRepositoryInterface but '
             );
         }
-        //$container->setParameter('bdk.enquiry.repository_class', $repClass);
+
         $this->enableListener($container, 'bdk.enquiry.repository_class.listener', [$repClass], $driver);
     }
 }
