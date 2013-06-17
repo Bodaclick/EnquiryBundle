@@ -68,5 +68,4 @@ class TableNamePrefixListenerTest extends \PHPUnit_Framework_TestCase
         //The name remains untouched
         $this->assertEquals($this->metadata->getTableName(), 'Test');
     }
-
 }

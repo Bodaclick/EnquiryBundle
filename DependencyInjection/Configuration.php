@@ -62,7 +62,7 @@ class Configuration implements ConfigurationInterface
                         ->ifNotInArray($supportedInheritanceTypes)
                         ->thenInvalid(
                             'The %s inheritance type is not supported. Please choose one of '
-                                .json_encode($supportedInheritanceTypes)
+                            .json_encode($supportedInheritanceTypes)
                         )
                         ->end()
                     ->end()

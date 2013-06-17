@@ -40,7 +40,8 @@ class ResponseMappingListenerTest extends \PHPUnit_Framework_TestCase
     public function testLoadClassMetadataWithMultipleResponses()
     {
         $listener = new \BDK\EnquiryBundle\Doctrine\ODM\MongoDB\EventListener\ResponseMappingListener(
-            'DefaultResponse', array('other'=>'OtherResponse')
+            'DefaultResponse',
+            array('other'=>'OtherResponse')
         );
 
         $map = array(
@@ -61,7 +62,8 @@ class ResponseMappingListenerTest extends \PHPUnit_Framework_TestCase
     public function testLoadClassMetadataWithEmptyResponses()
     {
         $listener = new \BDK\EnquiryBundle\Doctrine\ODM\MongoDB\EventListener\ResponseMappingListener(
-            'DefaultResponse', array()
+            'DefaultResponse',
+            array()
         );
 
         $this->metadata->expects($this->never())
@@ -69,5 +71,4 @@ class ResponseMappingListenerTest extends \PHPUnit_Framework_TestCase
 
         $listener->loadClassMetadata($this->event);
     }
-
 }

@@ -57,10 +57,10 @@ class ResponseNormalizer implements NormalizerInterface, DenormalizerInterface
 
         $class = get_class($object);
 
-        if ($class!=$this->defaultResponseClass) {;
+        if ($class!=$this->defaultResponseClass) {
             $type = array_search($class, $this->responseClasses);
             if (!$type) {
-                throw new InvalidArgumentException(sprintf("Response type not valid: %s",$type));
+                throw new InvalidArgumentException(sprintf("Response type not valid: %s", $type));
             }
             $normalized['type'] = $type;
         }

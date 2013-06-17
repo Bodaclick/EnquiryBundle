@@ -29,6 +29,13 @@ BDK\EnquiryBundle\Entity\Enquiry:
       type: datetime
       nullable: true
       column: updated_at
+    expiresAt:
+      type: datetime
+      nullable: true
+      column: expires_at
+    sent:
+      type: boolean
+      column: sent
     about:
       type: string
       length: 255
