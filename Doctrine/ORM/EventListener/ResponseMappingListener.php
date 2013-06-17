@@ -51,15 +51,15 @@ class ResponseMappingListener
 
         //If it's a defined response class, check if it's subclass of the default one
         if (in_array($name, array_values($this->responseClasses))) {
-             if (!$classMetadata->getReflectionClass()->isSubclassOf($this->defaultResponse)) {
-                 throw new \LogicException(
-                     sprintf(
+            if (!$classMetadata->getReflectionClass()->isSubclassOf($this->defaultResponse)) {
+                throw new \LogicException(
+                    sprintf(
                         'The mapped response class %s is not a subclass of %s',
                         $name,
                         $this->defaultResponse
                     )
-                 );
-             }
+                );
+            }
         }
 
         //The discriminator map is only needed in the default Response class
@@ -88,7 +88,7 @@ class ResponseMappingListener
 
         $builder->setDiscriminatorColumn('type');
 
-        foreach ($this->responseClasses as $type=>$class) {
+        foreach ($this->responseClasses as $type => $class) {
             $builder->addDiscriminatorMapClass($type, $class);
         }
 

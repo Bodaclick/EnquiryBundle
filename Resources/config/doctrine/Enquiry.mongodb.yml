@@ -21,9 +21,12 @@ BDK\EnquiryBundle\Document\Enquiry:
     updatedAt:
       type: date
       column: updated_at
-      gedmo:
-        timestampable:
-          on: update
+    expiresAt:
+      type: date
+      column: expires_at
+    sent:
+      type: boolean
+      column: sent
     user:
       type: string
 
@@ -32,9 +35,14 @@ BDK\EnquiryBundle\Document\Enquiry:
       targetDocument: Response
 
   indexes:
-    name:
+    type:
       keys:
         type: asc
       options:
         safe: true
         sparse: true
+    user:
+      keys:
+        user: asc
+      options:
+        safe: true
