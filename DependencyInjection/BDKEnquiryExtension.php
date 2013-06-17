@@ -149,6 +149,6 @@ class BDKEnquiryExtension extends Extension
             );
         }
 
-        $this->enableListener($container, 'bdk.enquiry.repository_class.listener', [$repClass], $driver);
+        $this->enableListener($container, 'bdk.enquiry.repository_class.listener', array($repClass), $driver);
     }
 }
