@@ -36,6 +36,9 @@ class RepositoryClassListener
     public function loadClassMetadata(LoadClassMetadataEventArgs $args)
     {
         $classMetadata = $args->getClassMetadata();
+        if ($classMetadata->getName() != 'BDK\EnquiryBundle\Document\Enquiry') {
+            return;
+        }
         $classMetadata->setCustomRepositoryClass($this->repClass);
     }
 }
