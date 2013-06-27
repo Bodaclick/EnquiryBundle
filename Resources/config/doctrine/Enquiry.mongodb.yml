@@ -52,3 +52,9 @@ BDK\EnquiryBundle\Document\Enquiry:
       options:
         safe: true
         sparse: true
+    sent:
+      keys:
+        sent: asc
+      options:
+        safe: true
+
