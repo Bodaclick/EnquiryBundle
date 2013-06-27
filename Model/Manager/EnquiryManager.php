@@ -12,7 +12,10 @@
 namespace BDK\EnquiryBundle\Model\Manager;
 
 use BDK\EnquiryBundle\Model\Enquiry;
+use BDK\EnquiryBundle\Events\EnquiryEvent;
+use BDK\EnquiryBundle\Events\Events;
 use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 
 /**
  * Class EnquiryManager
@@ -23,18 +26,21 @@ class EnquiryManager
     protected $om;
     protected $repository;
     protected $class;
+    protected $dispatcher;
 
     /**
      * @param ObjectManager $om
      * @param               $class
      */
-    public function __construct(ObjectManager $om, $class)
+    public function __construct(ObjectManager $om, EventDispatcher $dispatcher, $class)
     {
         $this->om = $om;
         $this->repository = $om->getRepository($class);
 
         $metadata = $om->getClassMetadata($class);
         $this->class = $metadata->name;
+
+        $this->dispatcher = $dispatcher;
     }
 
     /**
@@ -61,7 +67,10 @@ class EnquiryManager
         $enquiry->setAbout($about);
         $enquiry->setSent(false);
 
-        return $enquiry;
+        $event = new EnquiryEvent($enquiry);
+        $this->dispatcher->dispatch(Events::CREATE, $event);
+
+        return $event->getEnquiry();
     }
 
     /**
