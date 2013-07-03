@@ -41,7 +41,6 @@ class BDKEnquiryExtension extends Extension
         //Repository Class
         $this->setRepositoryClass($config['repository_class'], $driver, $container);
 
-
         //Load mapping of subclasses of Response
         $responseClasses = $config['responses']['mapping'];
         $inheritanceType = $config['responses']['inheritance'];

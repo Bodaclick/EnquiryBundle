@@ -12,7 +12,6 @@
 namespace BDK\EnquiryBundle\Doctrine\ORM\Repository;
 
 use Doctrine\ORM\EntityRepository;
-use BDK\EnquiryBundle\Model\AboutInterface;
 use BDK\EnquiryBundle\Model\EnquiryRepositoryInterface;
 
 /**

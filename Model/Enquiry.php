@@ -230,6 +230,7 @@ abstract class Enquiry implements EnquiryInterface, NormalizableInterface
     public function setType($type)
     {
         $this->type = $type;
+
         return $this;
     }
 
@@ -249,6 +250,7 @@ abstract class Enquiry implements EnquiryInterface, NormalizableInterface
     public function setCreatedAt($createdAt)
     {
         $this->createdAt = $createdAt;
+
         return $this;
     }
 
@@ -268,6 +270,7 @@ abstract class Enquiry implements EnquiryInterface, NormalizableInterface
     public function setUpdatedAt($updatedAt)
     {
         $this->updatedAt = $updatedAt;
+
         return $this;
     }
 
@@ -287,6 +290,7 @@ abstract class Enquiry implements EnquiryInterface, NormalizableInterface
     public function setStatus($status)
     {
         $this->status = $status;
+
         return $this;
     }
 
