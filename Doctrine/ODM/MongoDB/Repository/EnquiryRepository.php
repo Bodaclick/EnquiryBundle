@@ -12,7 +12,6 @@
 namespace BDK\EnquiryBundle\Doctrine\ODM\MongoDB\Repository;
 
 use Doctrine\ODM\MongoDB\DocumentRepository;
-use BDK\EnquiryBundle\Model\AboutInterface;
 use BDK\EnquiryBundle\Model\EnquiryRepositoryInterface;
 
 /**
@@ -23,7 +22,7 @@ class EnquiryRepository extends DocumentRepository implements EnquiryRepositoryI
     /**
      * Gets all the enquiries associated with a list of users
      *
-     * @param  array $users
+     * @param  array                                                                $users
      * @return array|bool|\Doctrine\MongoDB\ArrayIterator|\Doctrine\MongoDB\Cursor|
      *          \Doctrine\MongoDB\EagerCursor|int|mixed|\MongoCursor|null
      */

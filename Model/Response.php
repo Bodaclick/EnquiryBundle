@@ -81,6 +81,7 @@ abstract class Response
     public function setAnswer($answer)
     {
         $this->answer = $answer;
+
         return $this;
     }
 
@@ -110,6 +111,7 @@ abstract class Response
     public function setEnquiry($enquiry)
     {
         $this->enquiry = $enquiry;
+
         return $this;
     }
 }
