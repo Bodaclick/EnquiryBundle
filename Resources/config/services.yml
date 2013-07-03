@@ -7,6 +7,7 @@ services:
         class: BDK\EnquiryBundle\Model\Manager\EnquiryManager
         arguments:
             - @bdk.enquiry.object_manager
+            - @event_dispatcher
             - BDKEnquiryBundle:Enquiry
 
     bdk.enquiry.service:
