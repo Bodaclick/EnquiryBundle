@@ -33,7 +33,7 @@ class BDKEnquiryExtensionTest extends \PHPUnit_Framework_TestCase
         $loader->load(array($config), $this->configuration);
     }
 
-    public function testLoadThrowsExceptionUnlessDatabaseDriverIsValid()
+    public function testLoadThrowsExceptionUnlessDatabaseDrivervalidate()
     {
         $this->setExpectedException('\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException');
         $loader = new BDKEnquiryExtension();
