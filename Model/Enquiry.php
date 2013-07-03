@@ -18,6 +18,7 @@ use Doctrine\Common\Collections\Collection;
 
 abstract class Enquiry implements EnquiryInterface, NormalizableInterface
 {
+
     const STATUS_NEW = 'new';
     const STATUS_PENDING = 'pending';
     const STATUS_DISMISS = 'dismiss';
@@ -186,19 +187,20 @@ abstract class Enquiry implements EnquiryInterface, NormalizableInterface
      *
      * @param  \Symfony\Component\Serializer\Normalizer\NormalizerInterface $normalizer
      * @param  string|null                                                  $format
+     * @param array $context Options for normalizing this object
      * @return array|\Symfony\Component\Serializer\Normalizer\scalar
      */
-    public function normalize(NormalizerInterface $normalizer, $format = null)
+    public function normalize(NormalizerInterface $normalizer, $format = null, array $context = array())
     {
         $normalized = array();
 
         $normalized['id'] = $this->id;
 
-        if ($this->form!=null) {
+        if ($this->form != null) {
             $normalized['form'] = $this->form;
         }
 
-        if ($this->name!=null) {
+        if ($this->name != null) {
             $normalized['name'] = $this->name;
         }
 
@@ -210,8 +212,7 @@ abstract class Enquiry implements EnquiryInterface, NormalizableInterface
 
         $normalized['responses'] = $responses;
 
-        return array('enquiry'=>$normalized);
-
+        return array('enquiry' => $normalized);
     }
 
     /**
@@ -325,4 +326,5 @@ abstract class Enquiry implements EnquiryInterface, NormalizableInterface
     {
         return $this->sent;
     }
+
 }
