@@ -6,6 +6,8 @@ BDK\EnquiryBundle\Document\Enquiry:
   fields:
     id:
       id: true
+    title:
+      type: string
     type:
       type: string
     about:
