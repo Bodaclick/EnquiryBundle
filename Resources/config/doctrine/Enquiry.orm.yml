@@ -13,6 +13,10 @@ BDK\EnquiryBundle\Entity\Enquiry:
       id: true
       generator:
         strategy: AUTO
+    title:
+      type: string
+      length: 255
+      nullable: false
     type:
       type: string
       length: 255
