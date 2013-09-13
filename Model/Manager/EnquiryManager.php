@@ -52,11 +52,17 @@ class EnquiryManager
     }
 
     /**
+     * @param $user
+     * @param $about
+     * @param $type
+     * @param $expDate
      * @return mixed
      */
     public function create($user, $about, $type, $expDate)
     {
         $enquiry = new $this->class();
+
+
 
         $enquiry->setCreatedAt(new \DateTime());
         $enquiry->setExpiresAt($expDate);
