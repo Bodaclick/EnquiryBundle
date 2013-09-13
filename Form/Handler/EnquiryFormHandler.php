@@ -7,6 +7,7 @@ use BDK\EnquiryBundle\Events\Events;
 use BDK\EnquiryBundle\Model\Manager\EnquiryManager;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * EnquiryFormHandler
@@ -38,18 +39,18 @@ class EnquiryFormHandler
 
     /**
      * @param FormInterface            $form
-     * @param array                    $params
+     * @param Request                  $request
      * @param EnquiryManager           $em
      * @param EventDispatcherInterface $dispatcher
      */
     public function __construct(
         FormInterface $form,
-        array $params,
+        Request $request,
         EnquiryManager $em,
         EventDispatcherInterface $dispatcher
     ) {
         $this->form = $form;
-        $this->params = $params;
+        $this->params = $request->request->all();
         $this->em = $em;
         $this->dispatcher = $dispatcher;
     }
@@ -61,7 +62,7 @@ class EnquiryFormHandler
      */
     public function process()
     {
-        $this->form->bind($this->params);
+        $this->form->submit($this->params);
 
         if (!$this->form->isValid()) {
             return false;
