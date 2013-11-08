@@ -20,14 +20,17 @@ class RepositoryClassListener
 {
     protected $repClass;
 
+    protected $docClass;
+
     /**
      * __construct
      *
      * @param string $repClass
      */
-    public function __construct($repClass)
+    public function __construct($repClass, $docClass)
     {
         $this->repClass = $repClass;
+        $this->docClass = $docClass;
     }
 
     /**
@@ -36,7 +39,7 @@ class RepositoryClassListener
     public function loadClassMetadata(LoadClassMetadataEventArgs $args)
     {
         $classMetadata = $args->getClassMetadata();
-        if ($classMetadata->getName() != 'BDK\EnquiryBundle\Document\Enquiry') {
+        if ($classMetadata->getName() != $this->docClass) {
             return;
         }
         $classMetadata->setCustomRepositoryClass($this->repClass);

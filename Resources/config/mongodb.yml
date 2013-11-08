@@ -1,6 +1,7 @@
 parameters:
     bdk.response_mapping:
       default: BDK\EnquiryBundle\Document\Response
+    bdk.enquiry.enquiry_class: BDK\EnquiryBundle\Document\Enquiry
 
 services:
 

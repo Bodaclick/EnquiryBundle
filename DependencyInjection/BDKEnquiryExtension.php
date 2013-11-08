@@ -38,6 +38,10 @@ class BDKEnquiryExtension extends Extension
         //Load configuration for the db_driver given
         $loader->load(sprintf('%s.yml', $driver));
 
+        $container->setParameter('bdk.enquiry.enquiry_class', $config['enquiry_class']);
+
+
+
         //Repository Class
         $this->setRepositoryClass($config['repository_class'], $driver, $container);
 
@@ -148,6 +152,11 @@ class BDKEnquiryExtension extends Extension
             );
         }
 
-        $this->enableListener($container, 'bdk.enquiry.repository_class.listener', array($repClass), $driver);
+        $this->enableListener(
+            $container,
+            'bdk.enquiry.repository_class.listener',
+            array($repClass, $container->getParameter('bdk.enquiry.enquiry_class')),
+            $driver
+        );
     }
 }
