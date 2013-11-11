@@ -19,7 +19,6 @@ use Symfony\Component\EventDispatcher\EventDispatcher;
 
 /**
  * Class EnquiryManager
- * @package BDK\EnquiryBundle\Model\Manager
  */
 class EnquiryManager
 {
@@ -29,8 +28,9 @@ class EnquiryManager
     protected $dispatcher;
 
     /**
-     * @param ObjectManager $om
-     * @param               $class
+     * @param ObjectManager   $om
+     * @param EventDispatcher $dispatcher
+     * @param                 $class
      */
     public function __construct(ObjectManager $om, EventDispatcher $dispatcher, $class)
     {
@@ -52,6 +52,14 @@ class EnquiryManager
     }
 
     /**
+     * @return mixed
+     */
+    public function getClass()
+    {
+        return $this->class;
+    }
+
+    /**
      * @param $user
      * @param $about
      * @param $type
@@ -61,8 +69,6 @@ class EnquiryManager
     public function create($user, $about, $type, $expDate)
     {
         $enquiry = new $this->class();
-
-
 
         $enquiry->setCreatedAt(new \DateTime());
         $enquiry->setExpiresAt($expDate);
@@ -93,7 +99,8 @@ class EnquiryManager
     }
 
     /**
-     * @param $element
+     * @param      $element
+     * @param bool $andFlush
      */
     public function remove($element, $andFlush = true)
     {
