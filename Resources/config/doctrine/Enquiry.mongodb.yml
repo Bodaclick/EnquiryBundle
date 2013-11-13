@@ -1,5 +1,5 @@
 BDK\EnquiryBundle\Document\Enquiry:
-  type: document
+  type: mappedSuperclass
   repositoryClass: BDK\EnquiryBundle\Doctrine\ODM\MongoDB\Repository\EnquiryRepository
   collection: enquiries
   requireIndexes: true
