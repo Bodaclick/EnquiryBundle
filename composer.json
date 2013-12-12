@@ -12,7 +12,7 @@
         "symfony/serializer": "2.3.*",
         "symfony/security-bundle": "2.3.*",
         "doctrine/mongodb-odm-bundle": "3.0.*",
-        "doctrine/mongodb-odm": ">=1.0.0-beta5,<1.1-dev"
+        "doctrine/mongodb-odm": ">=1,<1.1-dev"
     },
     "require-dev": {
     	"doctrine/doctrine-bundle": "*",
